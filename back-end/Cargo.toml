@@ -16,3 +16,7 @@ sqlx = { version = "0.8.5", features = ["runtime-tokio", "macros", "postgres", "
 uuid = {version = "1.16.0", features = ["serde", "v4"]}
 redis = {version = "0.30.0", features = ["tokio-comp"]}
 tower-http = {version =  "0.6.2", features = ["cors"] }
+async-graphql = "7.0.16"
+async-graphql-axum = "7.0.16"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
