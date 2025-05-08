@@ -33,6 +33,11 @@ pub async fn get_teams(State(state): State<AppState>, Path(room_id): Path<String
 }
 
 
+pub async fn get_pool(State(state): State<AppState>, Path(pool_id): Path<i32>) -> Json<Vec<String>> {
+    Json(vec![]) // returning player-names along with their id's and stats id
+}
+
+
 pub async fn player_sold(player: PlayerSold) -> String {
     String::from("MumbaiIndians") // adding the player to the sqlx and redis, returning the team bought that player
 }

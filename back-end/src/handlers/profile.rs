@@ -2,7 +2,7 @@
 use axum::extract::{State,Path, Request};
 use axum::{Form, Json};
 
-use crate::models::Profile::{Password, Profile};
+use crate::models::profile::{Password, Profile};
 
 pub async fn profile(State(state): State<crate::AppState>,req: Request) -> Json<Profile> {
     // from authorization header we will get the username and user-id
