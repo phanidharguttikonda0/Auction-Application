@@ -4,7 +4,7 @@ Building the Application using Rust with Axum the things used in this applicatio
 
 ## Below is the Application Flow
 
-![Sequence Diagram](/home/phani/Documents/activity.jpg)
+![Sequence Diagram](assets/activity.jpg)
 
 
 ## Back-Routes
