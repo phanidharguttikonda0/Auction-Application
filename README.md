@@ -7,13 +7,13 @@ Building the Application using Rust with Axum the things used in this applicatio
 ![Activity Diagram](assets/activity.jpg)
 
 
-## Back-Routes
+## Back-End Routes
 
-/authentication/login - Post Url encoded - username and password
+Authentication-Routes:
 
-/authentication/sign-up Post Url encoded - mail_id , username and password
-
-/authentication/forget-password same but only mail_id
+    /authentication/login - Post Url encoded - username and password
+    /authentication/sign-up Post Url encoded - mail_id , username and password
+    /authentication/forget-password same but only mail_id
 
 My Next thing was to check whether all Rest API's were implemented or not
 along with handlers by cross checking with application sequence diagram.
