@@ -38,18 +38,38 @@ In Profile Page:
     As this is all we can do in Profile page.
 
 
-These are all the main-routes and below are the routes that are designed for inside room-coomunication.
+These are all the main-routes and below are the routes that are designed for
+inside room-coomunication.
+
+Room Communication with Actual Biddings:
+
+    -> Once every one joined room then, the room-creator can send Ready string via websocket and websocket response with the First Player.
+    (with player_id,player_name and base_price).
+
+    -> bidding will be taken place, each bid will be sent to the server via websocket and websocket checks whether user has money to buy 18 players after this bid and then adds the bid to the redis and broadcast to the remaining room.
+
+    -> once 10 seconds waiting team is over the last bid will taken to consideration and sold to that team and broadcasted to all the room.
+    if there is no bid , the player will be sent to unsold.
+
+    -> once players has been completed, the Auction room will be ended.
+
 
 Inside room apart from biddings
 
     (yet to write routes)
     -> get unsold players using graph ql
-    -> get players list by pool
-    -> get each team bought players
+
+    -> get players list by pool  (/rooms/get-pool/{pool_id} -> returns players name, player_id, base_price)
+
+    -> get each team bought players -> (/rooms/get-team/{room_id}/{team_name})
+
     -> we can add the players in to intrested players list , such that
-       those will be re-visited again after the each team has completed buying 16 players.
-    -> once each team has completed buying 16 players , the room-creator
-    can send a request that continue with the following intrested players instead of the auction-list such that auction will be completed faster
+       those will be re-visited again after the each team has completed buying 16 players. (/rooms/add-to-intrested/{player_id} so at last all players intrested players whom are unsold are not yet came will be sent to the server and stored in the redis).
+
+    -> once each team has completed buying 16 players, the room-creator
+    can send a request that continue with the following intrested players instead of the auction-list such that auction will be completed faster.
+    ws://localhost:9090/ with all intrested players list in a hash-set to be sent to the websocket.
+
 
 In Room Bidding
 
