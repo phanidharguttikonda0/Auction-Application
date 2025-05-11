@@ -1,0 +1,3740 @@
+[
+  {
+    "name": "Virat Kohli",
+    "profileLink": "/cricketers/virat-kohli-253802",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Rajat Patidar",
+    "profileLink": "/cricketers/rajat-patidar-823703",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Yash Dayal",
+    "profileLink": "/cricketers/yash-dayal-1159720",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Jasprit Bumrah",
+    "profileLink": "/cricketers/jasprit-bumrah-625383",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Suryakumar Yadav",
+    "profileLink": "/cricketers/suryakumar-yadav-446507",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Hardik Pandya",
+    "profileLink": "/cricketers/hardik-pandya-625371",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Rohit Sharma",
+    "profileLink": "/cricketers/rohit-sharma-34102",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Tilak Varma",
+    "profileLink": "/cricketers/tilak-varma-1170265",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Heinrich Klaasen",
+    "profileLink": "/cricketers/heinrich-klaasen-436757",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Pat Cummins",
+    "profileLink": "/cricketers/pat-cummins-489889",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Abhishek Sharma",
+    "profileLink": "/cricketers/abhishek-sharma-1070183",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Travis Head",
+    "profileLink": "/cricketers/travis-head-530011",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Nitish Kumar Reddy",
+    "profileLink": "/cricketers/nitish-kumar-reddy-1175496",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Ruturaj Gaikwad",
+    "profileLink": "/cricketers/ruturaj-gaikwad-1060380",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Ravindra Jadeja",
+    "profileLink": "/cricketers/ravindra-jadeja-234675",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Matheesha Pathirana",
+    "profileLink": "/cricketers/matheesha-pathirana-1194795",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Shivam Dube",
+    "profileLink": "/cricketers/shivam-dube-714451",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Ms Dhoni",
+    "profileLink": "/cricketers/ms-dhoni-28081",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Axar Patel",
+    "profileLink": "/cricketers/axar-patel-554691",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Kuldeep Yadav",
+    "profileLink": "/cricketers/kuldeep-yadav-559235",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Tristan Stubbs",
+    "profileLink": "/cricketers/tristan-stubbs-595978",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Abishek Porel",
+    "profileLink": "/cricketers/abishek-porel-1277545",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Rinku Singh",
+    "profileLink": "/cricketers/rinku-singh-723105",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Varun Chakravarthy",
+    "profileLink": "/cricketers/varun-chakravarthy-1108375",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Sunil Narine",
+    "profileLink": "/cricketers/sunil-narine-230558",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Andre Russell",
+    "profileLink": "/cricketers/andre-russell-276298",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Harshit Rana",
+    "profileLink": "/cricketers/harshit-rana-1312645",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Ramandeep Singh",
+    "profileLink": "/cricketers/ramandeep-singh-1079470",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Sanju Samson",
+    "profileLink": "/cricketers/sanju-samson-425943",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Yashasvi Jaiswal",
+    "profileLink": "/cricketers/yashasvi-jaiswal-1151278",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Riyan Parag",
+    "profileLink": "/cricketers/riyan-parag-1079434",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Dhruv Jurel",
+    "profileLink": "/cricketers/dhruv-jurel-1175488",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Shimron Hetmyer",
+    "profileLink": "/cricketers/shimron-hetmyer-670025",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Sandeep Sharma",
+    "profileLink": "/cricketers/sandeep-sharma-438362",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Rashid Khan",
+    "profileLink": "/cricketers/rashid-khan-793463",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Shubman Gill",
+    "profileLink": "/cricketers/shubman-gill-1070173",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Sai Sudharsan",
+    "profileLink": "/cricketers/sai-sudharsan-1151288",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Rahul Tewatia",
+    "profileLink": "/cricketers/rahul-tewatia-423838",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "M Shahrukh Khan",
+    "profileLink": "/cricketers/m-shahrukh-khan-719719",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Nicholas Pooran",
+    "profileLink": "/cricketers/nicholas-pooran-604302",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Ravi Bishnoi",
+    "profileLink": "/cricketers/ravi-bishnoi-1175441",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Mayank Yadav",
+    "profileLink": "/cricketers/mayank-yadav-1292563",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Mohsin Khan",
+    "profileLink": "/cricketers/mohsin-khan-1132005",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Ayush Badoni",
+    "profileLink": "/cricketers/ayush-badoni-1151270",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Shashank Singh",
+    "profileLink": "/cricketers/shashank-singh-377534",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Prabhsimran Singh",
+    "profileLink": "/cricketers/prabhsimran-singh-1161024",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Jos Buttler",
+    "profileLink": "/cricketers/jos-buttler-308967",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Shreyas Iyer",
+    "profileLink": "/cricketers/shreyas-iyer-642519",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Rishabh Pant",
+    "profileLink": "/cricketers/rishabh-pant-931581",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Kagiso Rabada",
+    "profileLink": "/cricketers/kagiso-rabada-550215",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Arshdeep Singh",
+    "profileLink": "/cricketers/arshdeep-singh-1125976",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Mitchell Starc",
+    "profileLink": "/cricketers/mitchell-starc-311592",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Yuzvendra Chahal",
+    "profileLink": "/cricketers/yuzvendra-chahal-430246",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Liam Livingstone",
+    "profileLink": "/cricketers/liam-livingstone-403902",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "David Miller",
+    "profileLink": "/cricketers/david-miller-321777",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Kl Rahul",
+    "profileLink": "/cricketers/kl-rahul-422108",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Mohammed Shami",
+    "profileLink": "/cricketers/mohammed-shami-481896",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Mohammed Siraj",
+    "profileLink": "/cricketers/mohammed-siraj-940973",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Harry Brook",
+    "profileLink": "/cricketers/harry-brook-911707",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Devon Conway",
+    "profileLink": "/cricketers/devon-conway-379140",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Jake Fraser Mcgurk",
+    "profileLink": "/cricketers/jake-fraser-mcgurk-1168049",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Aiden Markram",
+    "profileLink": "/cricketers/aiden-markram-600498",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Devdutt Padikkal",
+    "profileLink": "/cricketers/devdutt-padikkal-1119026",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Rahul Tripathi",
+    "profileLink": "/cricketers/rahul-tripathi-446763",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "David Warner",
+    "profileLink": "/cricketers/david-warner-219889",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Ravichandran Ashwin",
+    "profileLink": "/cricketers/ravichandran-ashwin-26421",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Venkatesh Iyer",
+    "profileLink": "/cricketers/venkatesh-iyer-851403",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Mitchell Marsh",
+    "profileLink": "/cricketers/mitchell-marsh-272450",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Glenn Maxwell",
+    "profileLink": "/cricketers/glenn-maxwell-325026",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Harshal Patel",
+    "profileLink": "/cricketers/harshal-patel-390481",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Rachin Ravindra",
+    "profileLink": "/cricketers/rachin-ravindra-959767",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Marcus Stoinis",
+    "profileLink": "/cricketers/marcus-stoinis-325012",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Jonny Bairstow",
+    "profileLink": "/cricketers/jonny-bairstow-297433",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Quinton De Kock",
+    "profileLink": "/cricketers/quinton-de-kock-379143",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Rahmanullah Gurbaz",
+    "profileLink": "/cricketers/rahmanullah-gurbaz-974087",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Ishan Kishan",
+    "profileLink": "/cricketers/ishan-kishan-720471",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Phil Salt",
+    "profileLink": "/cricketers/phil-salt-669365",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Jitesh Sharma",
+    "profileLink": "/cricketers/jitesh-sharma-721867",
+    "type": "BAT",
+    "base": 100
+  },
+  {
+    "name": "Khaleel Ahmed",
+    "profileLink": "/cricketers/khaleel-ahmed-942645",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Trent Boult",
+    "profileLink": "/cricketers/trent-boult-277912",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Josh Hazlewood",
+    "profileLink": "/cricketers/josh-hazlewood-288284",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Avesh Khan",
+    "profileLink": "/cricketers/avesh-khan-694211",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Prasidh Krishna",
+    "profileLink": "/cricketers/prasidh-krishna-917159",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "T Natarajan",
+    "profileLink": "/cricketers/t-natarajan-802575",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Anrich Nortje",
+    "profileLink": "/cricketers/anrich-nortje-481979",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Noor Ahmad",
+    "profileLink": "/cricketers/noor-ahmad-1182529",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Rahul Chahar",
+    "profileLink": "/cricketers/rahul-chahar-1064812",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Wanindu Hasaranga",
+    "profileLink": "/cricketers/wanindu-hasaranga-784379",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Waqar Salamkheil",
+    "profileLink": "/cricketers/waqar-salamkheil-1108490",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Maheesh Theekshana",
+    "profileLink": "/cricketers/maheesh-theekshana-1138316",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Adam Zampa",
+    "profileLink": "/cricketers/adam-zampa-379504",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Yash Dhull",
+    "profileLink": "/cricketers/yash-dhull-1292498",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Abhinav Manohar",
+    "profileLink": "/cricketers/abhinav-manohar-778963",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Karun Nair",
+    "profileLink": "/cricketers/karun-nair-398439",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Angkrish Raghuvanshi",
+    "profileLink": "/cricketers/angkrish-raghuvanshi-1292495",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Anmolpreet Singh",
+    "profileLink": "/cricketers/anmolpreet-singh-851261",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Atharva Taide",
+    "profileLink": "/cricketers/atharva-taide-1125958",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Nehal Wadhera",
+    "profileLink": "/cricketers/nehal-wadhera-1151273",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Harpreet Brar",
+    "profileLink": "/cricketers/harpreet-brar-1168641",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Naman Dhir",
+    "profileLink": "/cricketers/naman-dhir-1287032",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mahipal Lomror",
+    "profileLink": "/cricketers/mahipal-lomror-853265",
+    "type": "AR",
+    "base": 50
+  },
+  {
+    "name": "Sameer Rizvi",
+    "profileLink": "/cricketers/sameer-rizvi-1175489",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Abdul Samad",
+    "profileLink": "/cricketers/abdul-samad-1175485",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vijay Shankar",
+    "profileLink": "/cricketers/vijay-shankar-477021",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ashutosh Sharma",
+    "profileLink": "/cricketers/ashutosh-sharma-1131978",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Nishant Sindhu",
+    "profileLink": "/cricketers/nishant-sindhu-1292506",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Utkarsh Singh",
+    "profileLink": "/cricketers/utkarsh-singh-1081437",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Aryan Juyal",
+    "profileLink": "/cricketers/aryan-juyal-1130300",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Kumar Kushagra",
+    "profileLink": "/cricketers/kumar-kushagra-1207295",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Robin Minz",
+    "profileLink": "/cricketers/robin-minz-1350762",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Anuj Rawat",
+    "profileLink": "/cricketers/anuj-rawat-1123073",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Luvnith Sisodia",
+    "profileLink": "/cricketers/luvnith-sisodia-1155253",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Vishnu Vinod",
+    "profileLink": "/cricketers/vishnu-vinod-732293",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Upendra Yadav",
+    "profileLink": "/cricketers/upendra-yadav-732269",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Vaibhav Arora",
+    "profileLink": "/cricketers/vaibhav-arora-1209292",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Rasikh Salam",
+    "profileLink": "/cricketers/rasikh-salam-1161489",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Akash Madhwal",
+    "profileLink": "/cricketers/akash-madhwal-1206039",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Mohit Sharma",
+    "profileLink": "/cricketers/mohit-sharma-537119",
+    "type": "BOWL",
+    "base": 50
+  },
+  {
+    "name": "Simarjeet Singh",
+    "profileLink": "/cricketers/simarjeet-singh-1159722",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Yash Thakur",
+    "profileLink": "/cricketers/yash-thakur-1070196",
+    "type": "BOWL",
+    "base": 40
+  },
+  {
+    "name": "Kartik Tyagi",
+    "profileLink": "/cricketers/kartik-tyagi-1122918",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Vijaykumar Vyshak",
+    "profileLink": "/cricketers/vijaykumar-vyshak-777815",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Piyush Chawla",
+    "profileLink": "/cricketers/piyush-chawla-32966",
+    "type": "BOWL",
+    "base": 50
+  },
+  {
+    "name": "Shreyas Gopal",
+    "profileLink": "/cricketers/shreyas-gopal-344580",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Mayank Markande",
+    "profileLink": "/cricketers/mayank-markande-1081442",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Suyash Sharma",
+    "profileLink": "/cricketers/suyash-sharma-1350792",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Karn Sharma",
+    "profileLink": "/cricketers/karn-sharma-30288",
+    "type": "BOWL",
+    "base": 50
+  },
+  {
+    "name": "Kumar Kartikeya",
+    "profileLink": "/cricketers/kumar-kartikeya-1159843",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Manav Suthar",
+    "profileLink": "/cricketers/manav-suthar-1175426",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Mayank Agarwal",
+    "profileLink": "/cricketers/mayank-agarwal-398438",
+    "type": "BAT",
+    "base": 100
+  },
+  {
+    "name": "Faf Du Plessis",
+    "profileLink": "/cricketers/faf-du-plessis-44828",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Glenn Phillips",
+    "profileLink": "/cricketers/glenn-phillips-823509",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Rovman Powell",
+    "profileLink": "/cricketers/rovman-powell-820351",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Ajinkya Rahane",
+    "profileLink": "/cricketers/ajinkya-rahane-277916",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Prithvi Shaw",
+    "profileLink": "/cricketers/prithvi-shaw-1070168",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Kane Williamson",
+    "profileLink": "/cricketers/kane-williamson-277906",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Sam Curran",
+    "profileLink": "/cricketers/sam-curran-662973",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Marco Jansen",
+    "profileLink": "/cricketers/marco-jansen-696401",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Daryl Mitchell",
+    "profileLink": "/cricketers/daryl-mitchell-17970",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Krunal Pandya",
+    "profileLink": "/cricketers/krunal-pandya-471342",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Nitish Rana",
+    "profileLink": "/cricketers/nitish-rana-604527",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Washington Sundar",
+    "profileLink": "/cricketers/washington-sundar-719715",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Shardul Thakur",
+    "profileLink": "/cricketers/shardul-thakur-475281",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Srikar Bharat",
+    "profileLink": "/cricketers/srikar-bharat-529436",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Alex Carey",
+    "profileLink": "/cricketers/alex-carey-326434",
+    "type": "BAT",
+    "base": 100
+  },
+  {
+    "name": "Donovan Ferreira",
+    "profileLink": "/cricketers/donovan-ferreira-698315",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Shai Hope",
+    "profileLink": "/cricketers/shai-hope-581379",
+    "type": "BAT",
+    "base": 125
+  },
+  {
+    "name": "Josh Inglis",
+    "profileLink": "/cricketers/josh-inglis-662235",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Ryan Rickelton",
+    "profileLink": "/cricketers/ryan-rickelton-605661",
+    "type": "BAT",
+    "base": 100
+  },
+  {
+    "name": "Deepak Chahar",
+    "profileLink": "/cricketers/deepak-chahar-447261",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Gerald Coetzee",
+    "profileLink": "/cricketers/gerald-coetzee-596010",
+    "type": "BOWL",
+    "base": 125
+  },
+  {
+    "name": "Akash Deep",
+    "profileLink": "/cricketers/akash-deep-1176959",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Tushar Deshpande",
+    "profileLink": "/cricketers/tushar-deshpande-822553",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Lockie Ferguson",
+    "profileLink": "/cricketers/lockie-ferguson-493773",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Bhuvneshwar Kumar",
+    "profileLink": "/cricketers/bhuvneshwar-kumar-326016",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Mukesh Kumar",
+    "profileLink": "/cricketers/mukesh-kumar-926851",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Am Ghazanfar",
+    "profileLink": "/cricketers/am-ghazanfar-1326798",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Akeal Hosein",
+    "profileLink": "/cricketers/akeal-hosein-530812",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Keshav Maharaj",
+    "profileLink": "/cricketers/keshav-maharaj-267724",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Mujeeb Ur Rahman",
+    "profileLink": "/cricketers/mujeeb-ur-rahman-974109",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Adil Rashid",
+    "profileLink": "/cricketers/adil-rashid-244497",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Vijayakanth Viyaskanth",
+    "profileLink": "/cricketers/vijayakanth-viyaskanth-1153149",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Ricky Bhui",
+    "profileLink": "/cricketers/ricky-bhui-642531",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Swastik Chikara",
+    "profileLink": "/cricketers/swastik-chikara-1403198",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Aarya Desai",
+    "profileLink": "/cricketers/aarya-desai-1353014",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Shubham Dubey",
+    "profileLink": "/cricketers/shubham-dubey-1252585",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Madhav Kaushik",
+    "profileLink": "/cricketers/madhav-kaushik-1163698",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Pukhraj Mann",
+    "profileLink": "/cricketers/pukhraj-mann-1299843",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Shaik Rasheed",
+    "profileLink": "/cricketers/shaik-rasheed-1292497",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Himmat Singh",
+    "profileLink": "/cricketers/himmat-singh-805235",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Mayank Dagar",
+    "profileLink": "/cricketers/mayank-dagar-942367",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Anshul Kamboj",
+    "profileLink": "/cricketers/anshul-kamboj-1175428",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Arshad Khan",
+    "profileLink": "/cricketers/arshad-khan-1244751",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Darshan Nalkande",
+    "profileLink": "/cricketers/darshan-nalkande-1111917",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Suyash Prabhudessai",
+    "profileLink": "/cricketers/suyash-prabhudessai-1083851",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Anukul Roy",
+    "profileLink": "/cricketers/anukul-roy-1079839",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Swapnil Singh",
+    "profileLink": "/cricketers/swapnil-singh-232292",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sanvir Singh",
+    "profileLink": "/cricketers/sanvir-singh-1132219",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Aravelly Avanish",
+    "profileLink": "/cricketers/aravelly-avanish-1408675",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Vansh Bedi",
+    "profileLink": "/cricketers/vansh-bedi-1413379",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Saurav Chauhan",
+    "profileLink": "/cricketers/saurav-chauhan-1287369",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Harvik Desai",
+    "profileLink": "/cricketers/harvik-desai-1070195",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Tom Kohler Cadmore",
+    "profileLink": "/cricketers/tom-kohler-cadmore-470633",
+    "type": "BAT",
+    "base": 50
+  },
+  {
+    "name": "Kunal Singh Rathore",
+    "profileLink": "/cricketers/kunal-singh-rathore-1339031",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Br Sharath",
+    "profileLink": "/cricketers/br-sharath-917231",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Gurnoor Brar",
+    "profileLink": "/cricketers/gurnoor-brar-1287033",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Mukesh Choudhary",
+    "profileLink": "/cricketers/mukesh-choudhary-1125688",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Sakib Hussain",
+    "profileLink": "/cricketers/sakib-hussain-1340422",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Vidwath Kaverappa",
+    "profileLink": "/cricketers/vidwath-kaverappa-1155262",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Rajan Kumar",
+    "profileLink": "/cricketers/rajan-kumar-1339027",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Sushant Mishra",
+    "profileLink": "/cricketers/sushant-mishra-1175457",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Arjun Tendulkar",
+    "profileLink": "/cricketers/arjun-tendulkar-1148776",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Zeeshan Ansari",
+    "profileLink": "/cricketers/zeeshan-ansari-942371",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Prince Choudhary",
+    "profileLink": "/cricketers/prince-choudhary-1412827",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Himanshu Sharma",
+    "profileLink": "/cricketers/himanshu-sharma-1350761",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Manimaran Siddharth",
+    "profileLink": "/cricketers/manimaran-siddharth-1151286",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Digvesh Rathi",
+    "profileLink": "/cricketers/digvesh-rathi-1460529",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Prashant Solanki",
+    "profileLink": "/cricketers/prashant-solanki-1252337",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Jhathavedh Subramanyan",
+    "profileLink": "/cricketers/jhathavedh-subramanyan-919531",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Finn Allen",
+    "profileLink": "/cricketers/finn-allen-959759",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Dewald Brevis",
+    "profileLink": "/cricketers/dewald-brevis-1070665",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Ben Duckett",
+    "profileLink": "/cricketers/ben-duckett-521637",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Manish Pandey",
+    "profileLink": "/cricketers/manish-pandey-290630",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Rilee Rossouw",
+    "profileLink": "/cricketers/rilee-rossouw-318845",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Sherfane Rutherford",
+    "profileLink": "/cricketers/sherfane-rutherford-914541",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Ashton Turner",
+    "profileLink": "/cricketers/ashton-turner-500268",
+    "type": "BAT",
+    "base": 100
+  },
+  {
+    "name": "James Vince",
+    "profileLink": "/cricketers/james-vince-296597",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Shahbaz Ahmed",
+    "profileLink": "/cricketers/shahbaz-ahmed-1159711",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Moeen Ali",
+    "profileLink": "/cricketers/moeen-ali-8917",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Tim David",
+    "profileLink": "/cricketers/tim-david-892749",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Deepak Hooda",
+    "profileLink": "/cricketers/deepak-hooda-497121",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Will Jacks",
+    "profileLink": "/cricketers/will-jacks-897549",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Azmatullah Omarzai",
+    "profileLink": "/cricketers/azmatullah-omarzai-819429",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Sai Kishore",
+    "profileLink": "/cricketers/sai-kishore-1048739",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Romario Shepherd",
+    "profileLink": "/cricketers/romario-shepherd-677077",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Tom Banton",
+    "profileLink": "/cricketers/tom-banton-877051",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Sam Billings",
+    "profileLink": "/cricketers/sam-billings-297628",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Jordan Cox",
+    "profileLink": "/cricketers/jordan-cox-1112537",
+    "type": "BAT",
+    "base": 125
+  },
+  {
+    "name": "Ben Mcdermott",
+    "profileLink": "/cricketers/ben-mcdermott-603410",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Kusal Mendis",
+    "profileLink": "/cricketers/kusal-mendis-629074",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Kusal Perera",
+    "profileLink": "/cricketers/kusal-perera-300631",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Josh Philippe",
+    "profileLink": "/cricketers/josh-philippe-1124282",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Tim Seifert",
+    "profileLink": "/cricketers/tim-seifert-625964",
+    "type": "BAT",
+    "base": 125
+  },
+  {
+    "name": "Nandre Burger",
+    "profileLink": "/cricketers/nandre-burger-971349",
+    "type": "BOWL",
+    "base": 125
+  },
+  {
+    "name": "Spencer Johnson",
+    "profileLink": "/cricketers/spencer-johnson-1123718",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Umran Malik",
+    "profileLink": "/cricketers/umran-malik-1246528",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Mustafizur Rahman",
+    "profileLink": "/cricketers/mustafizur-rahman-330902",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Ishant Sharma",
+    "profileLink": "/cricketers/ishant-sharma-236779",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Nuwan Thushara",
+    "profileLink": "/cricketers/nuwan-thushara-955235",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Naveen Ul Haq",
+    "profileLink": "/cricketers/naveen-ul-haq-793447",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Jaydev Unadkat",
+    "profileLink": "/cricketers/jaydev-unadkat-390484",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Umesh Yadav",
+    "profileLink": "/cricketers/umesh-yadav-376116",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Rishad Hossain",
+    "profileLink": "/cricketers/rishad-hossain-1139523",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Zahir Khan",
+    "profileLink": "/cricketers/zahir-khan-712219",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Nqabayomzi Peter",
+    "profileLink": "/cricketers/nqabayomzi-peter-946483",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Tanveer Sangha",
+    "profileLink": "/cricketers/tanveer-sangha-1170471",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Tabraiz Shamsi",
+    "profileLink": "/cricketers/tabraiz-shamsi-379145",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Jeffrey Vandersay",
+    "profileLink": "/cricketers/jeffrey-vandersay-370040",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Sachin Baby",
+    "profileLink": "/cricketers/sachin-baby-432783",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Priyam Garg",
+    "profileLink": "/cricketers/priyam-garg-1070180",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Harnoor Singh",
+    "profileLink": "/cricketers/harnoor-singh-1292496",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Ravichandran Smaran",
+    "profileLink": "/cricketers/ravichandran-smaran-1327722",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Shashwat Rawat",
+    "profileLink": "/cricketers/shashwat-rawat-1175472",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "C Andre Siddarth",
+    "profileLink": "/cricketers/c-andre-siddarth-1440190",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Avneesh Sudha",
+    "profileLink": "/cricketers/avneesh-sudha-1171647",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Apoorv Wankhade",
+    "profileLink": "/cricketers/apoorv-wankhade-505773",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Yudhvir Singh",
+    "profileLink": "/cricketers/yudhvir-singh-1206052",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Rishi Dhawan",
+    "profileLink": "/cricketers/rishi-dhawan-290727",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Rajvardhan Hangargekar",
+    "profileLink": "/cricketers/rajvardhan-hangargekar-1175429",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Tanush Kotian",
+    "profileLink": "/cricketers/tanush-kotian-1125960",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Arshin Kulkarni",
+    "profileLink": "/cricketers/arshin-kulkarni-1403153",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Shams Mulani",
+    "profileLink": "/cricketers/shams-mulani-1131607",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Shivam Singh",
+    "profileLink": "/cricketers/shivam-singh-1380113",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Lalit Yadav",
+    "profileLink": "/cricketers/lalit-yadav-1060363",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mohammed Azharuddeen",
+    "profileLink": "/cricketers/mohammed-azharuddeen-940733",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Lr Chethan",
+    "profileLink": "/cricketers/lr-chethan-1197718",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Aryaman Singh",
+    "profileLink": "/cricketers/aryaman-singh-1319150",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Urvil Patel",
+    "profileLink": "/cricketers/urvil-patel-1131570",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Sanskar Rawat",
+    "profileLink": "/cricketers/sanskar-rawat-1460365",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Bipin Saurabh",
+    "profileLink": "/cricketers/bipin-saurabh-1287029",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Tanay Thyagarajan",
+    "profileLink": "/cricketers/tanay-thyagarajan-1080008",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Money Grewal",
+    "profileLink": "/cricketers/money-grewal-1350777",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ashwani Kumar",
+    "profileLink": "/cricketers/ashwani-kumar-1209126",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ishan Porel",
+    "profileLink": "/cricketers/ishan-porel-967603",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Abhilash Shetty",
+    "profileLink": "/cricketers/abhilash-shetty-1155401",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Akash Singh",
+    "profileLink": "/cricketers/akash-singh-1175458",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Gurjapneet Singh",
+    "profileLink": "/cricketers/gurjapneet-singh-1269869",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Basil Thampi",
+    "profileLink": "/cricketers/basil-thampi-732291",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Murugan Ashwin",
+    "profileLink": "/cricketers/murugan-ashwin-528067",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Shreyas Chavan",
+    "profileLink": "/cricketers/shreyas-chavan-1460366",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Chintal Gandhi",
+    "profileLink": "/cricketers/chintal-gandhi-1246531",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Raghav Goyal",
+    "profileLink": "/cricketers/raghav-goyal-1350770",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Jagadeesha Suchith",
+    "profileLink": "/cricketers/jagadeesha-suchith-527663",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Roshan Waghsare",
+    "profileLink": "/cricketers/roshan-waghsare-1460367",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Bailapudi Yeswanth",
+    "profileLink": "/cricketers/bailapudi-yeswanth-1441778",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Sediqullah Atal",
+    "profileLink": "/cricketers/sediqullah-atal-1161050",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Matthew Breetzke",
+    "profileLink": "/cricketers/matthew-breetzke-595267",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Mark Chapman",
+    "profileLink": "/cricketers/mark-chapman-438563",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Brandon King",
+    "profileLink": "/cricketers/brandon-king-670035",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Evin Lewis",
+    "profileLink": "/cricketers/evin-lewis-431901",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Pathum Nissanka",
+    "profileLink": "/cricketers/pathum-nissanka-1028655",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Bhanuka Rajapaksa",
+    "profileLink": "/cricketers/bhanuka-rajapaksa-342619",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Steven Smith",
+    "profileLink": "/cricketers/steven-smith-267192",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Gus Atkinson",
+    "profileLink": "/cricketers/gus-atkinson-1039481",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Tom Curran",
+    "profileLink": "/cricketers/tom-curran-550235",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Krishnappa Gowtham",
+    "profileLink": "/cricketers/krishnappa-gowtham-424377",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Mohammad Nabi",
+    "profileLink": "/cricketers/mohammad-nabi-25913",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Gulbadin Naib",
+    "profileLink": "/cricketers/gulbadin-naib-352048",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Sikandar Raza",
+    "profileLink": "/cricketers/sikandar-raza-299572",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Mitchell Santner",
+    "profileLink": "/cricketers/mitchell-santner-502714",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Jayant Yadav",
+    "profileLink": "/cricketers/jayant-yadav-447587",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Johnson Charles",
+    "profileLink": "/cricketers/johnson-charles-333066",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Litton Das",
+    "profileLink": "/cricketers/litton-das-536936",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Andre Fletcher",
+    "profileLink": "/cricketers/andre-fletcher-51862",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Tom Latham",
+    "profileLink": "/cricketers/tom-latham-388802",
+    "type": "BAT",
+    "base": 150
+  },
+  {
+    "name": "Ollie Pope",
+    "profileLink": "/cricketers/ollie-pope-887207",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Kyle Verreynne",
+    "profileLink": "/cricketers/kyle-verreynne-595004",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Fazalhaq Farooqi",
+    "profileLink": "/cricketers/fazalhaq-farooqi-974175",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Richard Gleeson",
+    "profileLink": "/cricketers/richard-gleeson-473191",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Matt Henry",
+    "profileLink": "/cricketers/matt-henry-506612",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Alzarri Joseph",
+    "profileLink": "/cricketers/alzarri-joseph-670031",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Kwena Maphaka",
+    "profileLink": "/cricketers/kwena-maphaka-1294342",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Kuldeep Sen",
+    "profileLink": "/cricketers/kuldeep-sen-1163695",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Reece Topley",
+    "profileLink": "/cricketers/reece-topley-461632",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Lizaad Williams",
+    "profileLink": "/cricketers/lizaad-williams-379887",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Luke Wood",
+    "profileLink": "/cricketers/luke-wood-573170",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Sachin Dhas",
+    "profileLink": "/cricketers/sachin-dhas-1408683",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Leus Du Plooy",
+    "profileLink": "/cricketers/leus-du-plooy-595739",
+    "type": "BAT",
+    "base": 50
+  },
+  {
+    "name": "Ashwin Hebbar",
+    "profileLink": "/cricketers/ashwin-hebbar-801019",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Rohan Kunnummal",
+    "profileLink": "/cricketers/rohan-kunnummal-1079382",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Ayush Pandey",
+    "profileLink": "/cricketers/ayush-pandey-1277521",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Akshat Raghuwanshi",
+    "profileLink": "/cricketers/akshat-raghuwanshi-1300795",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Shoun Roger",
+    "profileLink": "/cricketers/shoun-roger-1140949",
+    "type": "BAT",
+    "base": 40
+  },
+  {
+    "name": "Virat Singh",
+    "profileLink": "/cricketers/virat-singh-720465",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Priyansh Arya",
+    "profileLink": "/cricketers/priyansh-arya-1175456",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Manoj Bhandage",
+    "profileLink": "/cricketers/manoj-bhandage-1057399",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Praveen Dubey",
+    "profileLink": "/cricketers/praveen-dubey-777515",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ajay Mandal",
+    "profileLink": "/cricketers/ajay-mandal-1059570",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Prerak Mankad",
+    "profileLink": "/cricketers/prerak-mankad-956871",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vipraj Nigam",
+    "profileLink": "/cricketers/vipraj-nigam-1449074",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vicky Ostwal",
+    "profileLink": "/cricketers/vicky-ostwal-1292520",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Shivalik Sharma",
+    "profileLink": "/cricketers/shivalik-sharma-1167965",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Salil Arora",
+    "profileLink": "/cricketers/salil-arora-1199281",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Dinesh Bana",
+    "profileLink": "/cricketers/dinesh-bana-1292500",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Guruswamy Ajitesh",
+    "profileLink": "/cricketers/guruswamy-ajitesh-1320758",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Narayan Jagadeesan",
+    "profileLink": "/cricketers/narayan-jagadeesan-1048813",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Krishnan Shrijith",
+    "profileLink": "/cricketers/krishnan-shrijith-778241",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Michael Pepper",
+    "profileLink": "/cricketers/michael-pepper-772293",
+    "type": "BAT",
+    "base": 50
+  },
+  {
+    "name": "Vishnu Solanki",
+    "profileLink": "/cricketers/vishnu-solanki-604593",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Km Asif",
+    "profileLink": "/cricketers/km-asif-1083030",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Akhil Chaudhary",
+    "profileLink": "/cricketers/akhil-chaudhary-1420401",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Himanshu Chauhan",
+    "profileLink": "/cricketers/himanshu-chauhan-1415164",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Arpit Guleria",
+    "profileLink": "/cricketers/arpit-guleria-1167306",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Saranu Nishanth",
+    "profileLink": "/cricketers/saranu-nishanth-1408690",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Kuldip Yadav",
+    "profileLink": "/cricketers/kuldip-yadav-1206495",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Prithvi Raj",
+    "profileLink": "/cricketers/prithvi-raj-1121579",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Shubham Agarwal",
+    "profileLink": "/cricketers/shubham-agarwal-1079668",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Jasinder Singh",
+    "profileLink": "/cricketers/jasinder-singh-969369",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Jasmer Dhankhar",
+    "profileLink": "/cricketers/jasmer-dhankhar-1106121",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Pulkit Narang",
+    "profileLink": "/cricketers/pulkit-narang-714605",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Saumy Pandey",
+    "profileLink": "/cricketers/saumy-pandey-1408673",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Mohit Rathee",
+    "profileLink": "/cricketers/mohit-rathee-1349361",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Himanshu Singh",
+    "profileLink": "/cricketers/himanshu-singh-1417024",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Towhid Hridoy",
+    "profileLink": "/cricketers/towhid-hridoy-990031",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Mikyle Louis",
+    "profileLink": "/cricketers/mikyle-louis-1078695",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Harry Tector",
+    "profileLink": "/cricketers/harry-tector-961407",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Rassie Van Der Dussen",
+    "profileLink": "/cricketers/rassie-van-der-dussen-337790",
+    "type": "BAT",
+    "base": 200
+  },
+  {
+    "name": "Will Young",
+    "profileLink": "/cricketers/will-young-547749",
+    "type": "BAT",
+    "base": 125
+  },
+  {
+    "name": "Najibullah Zadran",
+    "profileLink": "/cricketers/najibullah-zadran-524049",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Ibrahim Zadran",
+    "profileLink": "/cricketers/ibrahim-zadran-921509",
+    "type": "BAT",
+    "base": 75
+  },
+  {
+    "name": "Sean Abbott",
+    "profileLink": "/cricketers/sean-abbott-398666",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Jacob Bethell",
+    "profileLink": "/cricketers/jacob-bethell-1194959",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Brydon Carse",
+    "profileLink": "/cricketers/brydon-carse-596417",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Aaron Hardie",
+    "profileLink": "/cricketers/aaron-hardie-1124283",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Sarfaraz Khan",
+    "profileLink": "/cricketers/sarfaraz-khan-642525",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Kyle Mayers",
+    "profileLink": "/cricketers/kyle-mayers-348056",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Kamindu Mendis",
+    "profileLink": "/cricketers/kamindu-mendis-784373",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Matthew Short",
+    "profileLink": "/cricketers/matthew-short-605575",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Jason Behrendorff",
+    "profileLink": "/cricketers/jason-behrendorff-272477",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Dushmantha Chameera",
+    "profileLink": "/cricketers/dushmantha-chameera-552152",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Nathan Ellis",
+    "profileLink": "/cricketers/nathan-ellis-826915",
+    "type": "BOWL",
+    "base": 125
+  },
+  {
+    "name": "Shamar Joseph",
+    "profileLink": "/cricketers/shamar-joseph-1356971",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Josh Little",
+    "profileLink": "/cricketers/josh-little-928067",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Shivam Mavi",
+    "profileLink": "/cricketers/shivam-mavi-1079848",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Jhye Richardson",
+    "profileLink": "/cricketers/jhye-richardson-774223",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Navdeep Saini",
+    "profileLink": "/cricketers/navdeep-saini-700167",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Tanmay Agarwal",
+    "profileLink": "/cricketers/tanmay-agarwal-792725",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Amandeep Khare",
+    "profileLink": "/cricketers/amandeep-khare-942657",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Ayush Mhatre",
+    "profileLink": "/cricketers/ayush-mhatre-1452455",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Salman Nizar",
+    "profileLink": "/cricketers/salman-nizar-826349",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Aniket Verma",
+    "profileLink": "/cricketers/aniket-verma-1409976",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Sumeet Verma",
+    "profileLink": "/cricketers/sumeet-verma-390724",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Manan Vohra",
+    "profileLink": "/cricketers/manan-vohra-532856",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Samarth Vyas",
+    "profileLink": "/cricketers/samarth-vyas-853859",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Raj Bawa",
+    "profileLink": "/cricketers/raj-bawa-1292502",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Emanjot Singh Chahal",
+    "profileLink": "/cricketers/emanjot-singh-chahal-1454587",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Musheer Khan",
+    "profileLink": "/cricketers/musheer-khan-1316430",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Manvanth Kumar",
+    "profileLink": "/cricketers/manvanth-kumar-1392186",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mayank Rawat",
+    "profileLink": "/cricketers/mayank-rawat-1079847",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Suryansh Shedge",
+    "profileLink": "/cricketers/suryansh-shedge-1339698",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Hrithik Shokeen",
+    "profileLink": "/cricketers/hrithik-shokeen-1175423",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sonu Yadav",
+    "profileLink": "/cricketers/sonu-yadav-1048867",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Rithik Easwaran",
+    "profileLink": "/cricketers/rithik-easwaran-1320767",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Anmol Malhotra",
+    "profileLink": "/cricketers/anmol-malhotra-851259",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Pradosh Ranjan Paul",
+    "profileLink": "/cricketers/pradosh-ranjan-paul-1108328",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Karteek Sharma",
+    "profileLink": "/cricketers/karteek-sharma-1460368",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Akash Singh",
+    "profileLink": "/cricketers/akash-singh-1163666",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Khushal Gabhane",
+    "profileLink": "/cricketers/khushal-gabhane-1460369",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Siddarth Yadav",
+    "profileLink": "/cricketers/siddarth-yadav-1292499",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Saurabh Dubey",
+    "profileLink": "/cricketers/saurabh-dubey-1206492",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Aaqib Khan",
+    "profileLink": "/cricketers/aaqib-khan-1207680",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Kulwant Khejroliya",
+    "profileLink": "/cricketers/kulwant-khejroliya-1083033",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ankit Rajpoot",
+    "profileLink": "/cricketers/ankit-rajpoot-591650",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Divesh Sharma",
+    "profileLink": "/cricketers/divesh-sharma-1412829",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Naman Tiwari",
+    "profileLink": "/cricketers/naman-tiwari-1408677",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Prince Yadav",
+    "profileLink": "/cricketers/prince-yadav-1350768",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Kunal Singh Chibb",
+    "profileLink": "/cricketers/kunal-singh-chibb-1460370",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Yuvraj Chudasama",
+    "profileLink": "/cricketers/yuvraj-chudasama-969367",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Deepak Devadiga",
+    "profileLink": "/cricketers/deepak-devadiga-1392191",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ramesh Prasad",
+    "profileLink": "/cricketers/ramesh-prasad-1216252",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Shivam Shukla",
+    "profileLink": "/cricketers/shivam-shukla-1460342",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Himanshu Singh",
+    "profileLink": "/cricketers/himanshu-singh-1345711",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Tejpreet Singh",
+    "profileLink": "/cricketers/tejpreet-singh-1460371",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Qais Ahmad",
+    "profileLink": "/cricketers/qais-ahmad-914171",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Charith Asalanka",
+    "profileLink": "/cricketers/charith-asalanka-784367",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Michael Bracewell",
+    "profileLink": "/cricketers/michael-bracewell-326968",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Gudakesh Motie",
+    "profileLink": "/cricketers/gudakesh-motie-670045",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Dan Mousley",
+    "profileLink": "/cricketers/dan-mousley-1172968",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Jamie Overton",
+    "profileLink": "/cricketers/jamie-overton-510530",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Dunith Wellalage",
+    "profileLink": "/cricketers/dunith-wellalage-1152427",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Ottneil Baartman",
+    "profileLink": "/cricketers/ottneil-baartman-535353",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Xavier Bartlett",
+    "profileLink": "/cricketers/xavier-bartlett-1050545",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Dilshan Madushanka",
+    "profileLink": "/cricketers/dilshan-madushanka-793007",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Adam Milne",
+    "profileLink": "/cricketers/adam-milne-450860",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Lungi Ngidi",
+    "profileLink": "/cricketers/lungi-ngidi-542023",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Will O Rourke",
+    "profileLink": "/cricketers/will-o-rourke-1211825",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Chetan Sakariya",
+    "profileLink": "/cricketers/chetan-sakariya-1131754",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Sandeep Warrier",
+    "profileLink": "/cricketers/sandeep-warrier-592735",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Musaif Ajaz",
+    "profileLink": "/cricketers/musaif-ajaz-1170219",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Agni Chopra",
+    "profileLink": "/cricketers/agni-chopra-1403162",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Abhimanyu Easwaran",
+    "profileLink": "/cricketers/abhimanyu-easwaran-699491",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Sudip Kumar Gharami",
+    "profileLink": "/cricketers/sudip-kumar-gharami-1211699",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Shubham Khajuria",
+    "profileLink": "/cricketers/shubham-khajuria-543078",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Akhil Rawat",
+    "profileLink": "/cricketers/akhil-rawat-1216038",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Prateek Yadav",
+    "profileLink": "/cricketers/prateek-yadav-1246995",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Abdul Basith",
+    "profileLink": "/cricketers/abdul-basith-1287067",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Kc Cariappa",
+    "profileLink": "/cricketers/kc-cariappa-777537",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Yuvraj Chaudhary",
+    "profileLink": "/cricketers/yuvraj-chaudhary-1175463",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Aman Khan",
+    "profileLink": "/cricketers/aman-khan-1254269",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sumit Kumar",
+    "profileLink": "/cricketers/sumit-kumar-1159734",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Kamlesh Nagarkoti",
+    "profileLink": "/cricketers/kamlesh-nagarkoti-1070188",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Hardik Raj",
+    "profileLink": "/cricketers/hardik-raj-1392182",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Harsh Tyagi",
+    "profileLink": "/cricketers/harsh-tyagi-1081444",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "M Ajnas",
+    "profileLink": "/cricketers/m-ajnas-1403213",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Unmukt Chand",
+    "profileLink": "/cricketers/unmukt-chand-446499",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Tejasvi Dahiya",
+    "profileLink": "/cricketers/tejasvi-dahiya-1460372",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Sumit Ghadigaonkar",
+    "profileLink": "/cricketers/sumit-ghadigaonkar-714455",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Baba Indrajith",
+    "profileLink": "/cricketers/baba-indrajith-477069",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Muhammed Adnan Khan",
+    "profileLink": "/cricketers/muhammed-adnan-khan-1151292",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Bhagmender Lather",
+    "profileLink": "/cricketers/bhagmender-lather-1246521",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Baltej Singh",
+    "profileLink": "/cricketers/baltej-singh-527292",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ali Khan",
+    "profileLink": "/cricketers/ali-khan-927119",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ravi Kumar",
+    "profileLink": "/cricketers/ravi-kumar-1277532",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Vineet Panwar",
+    "profileLink": "/cricketers/vineet-panwar-1081526",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Vidyadhar Patil",
+    "profileLink": "/cricketers/vidyadhar-patil-1155265",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Aaradhya Shukla",
+    "profileLink": "/cricketers/aaradhya-shukla-1408680",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Abhinandan Singh",
+    "profileLink": "/cricketers/abhinandan-singh-1449085",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Cooper Connolly",
+    "profileLink": "/cricketers/cooper-connolly-1210488",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Dushan Hemantha",
+    "profileLink": "/cricketers/dushan-hemantha-721041",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Jason Holder",
+    "profileLink": "/cricketers/jason-holder-391485",
+    "type": "AR",
+    "base": 200
+  },
+  {
+    "name": "Karim Janat",
+    "profileLink": "/cricketers/karim-janat-793467",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "James Neesham",
+    "profileLink": "/cricketers/james-neesham-355269",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Daniel Sams",
+    "profileLink": "/cricketers/daniel-sams-826901",
+    "type": "AR",
+    "base": 150
+  },
+  {
+    "name": "Will Sutherland",
+    "profileLink": "/cricketers/will-sutherland-1076722",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Taskin Ahmed",
+    "profileLink": "/cricketers/taskin-ahmed-538506",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Ben Dwarshuis",
+    "profileLink": "/cricketers/ben-dwarshuis-679567",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Obed Mccoy",
+    "profileLink": "/cricketers/obed-mccoy-906783",
+    "type": "BOWL",
+    "base": 125
+  },
+  {
+    "name": "Riley Meredith",
+    "profileLink": "/cricketers/riley-meredith-961713",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Lance Morris",
+    "profileLink": "/cricketers/lance-morris-1125317",
+    "type": "BOWL",
+    "base": 125
+  },
+  {
+    "name": "Olly Stone",
+    "profileLink": "/cricketers/olly-stone-457279",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Daniel Worrall",
+    "profileLink": "/cricketers/daniel-worrall-557298",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Pyla Avinash",
+    "profileLink": "/cricketers/pyla-avinash-1324449",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Kiran Chormale",
+    "profileLink": "/cricketers/kiran-chormale-1408686",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Ashish Dahariya",
+    "profileLink": "/cricketers/ashish-dahariya-1460373",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Tushar Raheja",
+    "profileLink": "/cricketers/tushar-raheja-1151295",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Sarthak Ranjan",
+    "profileLink": "/cricketers/sarthak-ranjan-956405",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Abhijeet Tomar",
+    "profileLink": "/cricketers/abhijeet-tomar-1081183",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Krish Bhagat",
+    "profileLink": "/cricketers/krish-bhagat-1454586",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sohraab Dhaliwal",
+    "profileLink": "/cricketers/sohraab-dhaliwal-721853",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Harsh Dubey",
+    "profileLink": "/cricketers/harsh-dubey-1216159",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ramakrishna Ghosh",
+    "profileLink": "/cricketers/ramakrishna-ghosh-1339053",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Raj Limbani",
+    "profileLink": "/cricketers/raj-limbani-1410814",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ninad Rathva",
+    "profileLink": "/cricketers/ninad-rathva-1126213",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vivrant Sharma",
+    "profileLink": "/cricketers/vivrant-sharma-1252370",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Shiva Singh",
+    "profileLink": "/cricketers/shiva-singh-1070194",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sayed Irfan Aftab",
+    "profileLink": "/cricketers/sayed-irfan-aftab-1460374",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Anirudh Chowdhary",
+    "profileLink": "/cricketers/anirudh-chowdhary-1460375",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Siddarth Kaul",
+    "profileLink": "/cricketers/siddarth-kaul-326017",
+    "type": "BOWL",
+    "base": 40
+  },
+  {
+    "name": "Prashant Painkra",
+    "profileLink": "/cricketers/prashant-painkra-1403201",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Satyanarayana Raju",
+    "profileLink": "/cricketers/satyanarayana-raju-1392201",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Yeddala Reddy",
+    "profileLink": "/cricketers/yeddala-reddy-1324467",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Zakary Foulkes",
+    "profileLink": "/cricketers/zakary-foulkes-1202098",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Chris Green",
+    "profileLink": "/cricketers/chris-green-787073",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Shakib Al Hasan",
+    "profileLink": "/cricketers/shakib-al-hasan-56143",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Mehidy Hasan Miraz",
+    "profileLink": "/cricketers/mehidy-hasan-miraz-629063",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Wiaan Mulder",
+    "profileLink": "/cricketers/wiaan-mulder-698189",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Dwaine Pretorius",
+    "profileLink": "/cricketers/dwaine-pretorius-327830",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Dasun Shanaka",
+    "profileLink": "/cricketers/dasun-shanaka-437316",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Shoriful Islam",
+    "profileLink": "/cricketers/shoriful-islam-990039",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Blessing Muzarabani",
+    "profileLink": "/cricketers/blessing-muzarabani-827051",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Matthew Potts",
+    "profileLink": "/cricketers/matthew-potts-1027781",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Tanzim Hasan Sakib",
+    "profileLink": "/cricketers/tanzim-hasan-sakib-1139520",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Ben Sears",
+    "profileLink": "/cricketers/ben-sears-959769",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Tim Southee",
+    "profileLink": "/cricketers/tim-southee-232364",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "John Turner",
+    "profileLink": "/cricketers/john-turner-1261866",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Joshua Brown",
+    "profileLink": "/cricketers/joshua-brown-596068",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Oliver Davies",
+    "profileLink": "/cricketers/oliver-davies-1076377",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Bevon Jacobs",
+    "profileLink": "/cricketers/bevon-jacobs-1410577",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Atharva Kale",
+    "profileLink": "/cricketers/atharva-kale-1135483",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Abhishek Nair",
+    "profileLink": "/cricketers/abhishek-nair-1460377",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Vishwanath Pratap Singh",
+    "profileLink": "/cricketers/vishwanath-pratap-singh-1354639",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Lone Nasir",
+    "profileLink": "/cricketers/lone-nasir-1252366",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Brandon Mcmullen",
+    "profileLink": "/cricketers/brandon-mcmullen-949473",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sudhesan Midhun",
+    "profileLink": "/cricketers/sudhesan-midhun-1131619",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Abid Mushtaq",
+    "profileLink": "/cricketers/abid-mushtaq-1201536",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mahesh Pithiya",
+    "profileLink": "/cricketers/mahesh-pithiya-1216154",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Maramreddy Reddy",
+    "profileLink": "/cricketers/maramreddy-reddy-1324459",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Atit Sheth",
+    "profileLink": "/cricketers/atit-sheth-652361",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Jonty Sidhu",
+    "profileLink": "/cricketers/jonty-sidhu-1081438",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mohit Avasthi",
+    "profileLink": "/cricketers/mohit-avasthi-1252336",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Faridoon Dawoodzai",
+    "profileLink": "/cricketers/faridoon-dawoodzai-1304730",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Praful Hinge",
+    "profileLink": "/cricketers/praful-hinge-1216167",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Pankaj Jaswal",
+    "profileLink": "/cricketers/pankaj-jaswal-652359",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Vijay Kumar",
+    "profileLink": "/cricketers/vijay-kumar-1449032",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ashok Sharma",
+    "profileLink": "/cricketers/ashok-sharma-1299879",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Mujtaba Yousuf",
+    "profileLink": "/cricketers/mujtaba-yousuf-1175484",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Ashton Agar",
+    "profileLink": "/cricketers/ashton-agar-505120",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Roston Chase",
+    "profileLink": "/cricketers/roston-chase-391832",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Junior Dala",
+    "profileLink": "/cricketers/junior-dala-545467",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Mahedi Hasan",
+    "profileLink": "/cricketers/mahedi-hasan-833087",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Nangeyalia Kharote",
+    "profileLink": "/cricketers/nangeyalia-kharote-1199434",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Dan Lawrence",
+    "profileLink": "/cricketers/dan-lawrence-641423",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "Nathan Smith",
+    "profileLink": "/cricketers/nathan-smith-959771",
+    "type": "AR",
+    "base": 100
+  },
+  {
+    "name": "James Anderson",
+    "profileLink": "/cricketers/james-anderson-8608",
+    "type": "BOWL",
+    "base": 125
+  },
+  {
+    "name": "Kyle Jamieson",
+    "profileLink": "/cricketers/kyle-jamieson-625960",
+    "type": "BOWL",
+    "base": 150
+  },
+  {
+    "name": "Chris Jordan",
+    "profileLink": "/cricketers/chris-jordan-288992",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Hasan Mahmud",
+    "profileLink": "/cricketers/hasan-mahmud-926629",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Tymal Mills",
+    "profileLink": "/cricketers/tymal-mills-459257",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "David Payne",
+    "profileLink": "/cricketers/david-payne-362710",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Nahid Rana",
+    "profileLink": "/cricketers/nahid-rana-1210511",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Prayas Ray Barman",
+    "profileLink": "/cricketers/prayas-ray-barman-1159712",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Jafar Jamal",
+    "profileLink": "/cricketers/jafar-jamal-480167",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Ayaz Khan",
+    "profileLink": "/cricketers/ayaz-khan-1350774",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Kaushik Maity",
+    "profileLink": "/cricketers/kaushik-maity-926639",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Rituraj Sharma",
+    "profileLink": "/cricketers/rituraj-sharma-1411621",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Vaibhav Suryavanshi",
+    "profileLink": "/cricketers/vaibhav-suryavanshi-1408688",
+    "type": "BAT",
+    "base": 30
+  },
+  {
+    "name": "Kartik Chadha",
+    "profileLink": "/cricketers/kartik-chadha-1460378",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Writtick Chatterjee",
+    "profileLink": "/cricketers/writtick-chatterjee-699493",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Prerit Dutta",
+    "profileLink": "/cricketers/prerit-dutta-1287034",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Rajneesh Gurbani",
+    "profileLink": "/cricketers/rajneesh-gurbani-950165",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Shubhang Hegde",
+    "profileLink": "/cricketers/shubhang-hegde-1119008",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Saransh Jain",
+    "profileLink": "/cricketers/saransh-jain-731381",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ripal Patel",
+    "profileLink": "/cricketers/ripal-patel-1201520",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Akash Vasisht",
+    "profileLink": "/cricketers/akash-vasisht-722597",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Anirudh Kanwar",
+    "profileLink": "/cricketers/anirudh-kanwar-1201548",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Shubham Kapse",
+    "profileLink": "/cricketers/shubham-kapse-1126969",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Atif Mushtaq",
+    "profileLink": "/cricketers/atif-mushtaq-1460379",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Dipesh Parwani",
+    "profileLink": "/cricketers/dipesh-parwani-1403206",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Manish Reddy",
+    "profileLink": "/cricketers/manish-reddy-1292543",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Chetan Sharma",
+    "profileLink": "/cricketers/chetan-sharma-1450609",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Avinash Singh",
+    "profileLink": "/cricketers/avinash-singh-1350765",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Alick Athanaze",
+    "profileLink": "/cricketers/alick-athanaze-1078692",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Hilton Cartwright",
+    "profileLink": "/cricketers/hilton-cartwright-557295",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Dominic Drakes",
+    "profileLink": "/cricketers/dominic-drakes-906749",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Daryn Dupavillon",
+    "profileLink": "/cricketers/daryn-dupavillon-501907",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Matthew Forde",
+    "profileLink": "/cricketers/matthew-forde-1209190",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Patrick Kruger",
+    "profileLink": "/cricketers/patrick-kruger-499560",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Lahiru Kumara",
+    "profileLink": "/cricketers/lahiru-kumara-784375",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Michael Neser",
+    "profileLink": "/cricketers/michael-neser-376169",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Richard Ngarava",
+    "profileLink": "/cricketers/richard-ngarava-806241",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Wayne Parnell",
+    "profileLink": "/cricketers/wayne-parnell-265564",
+    "type": "BOWL",
+    "base": 100
+  },
+  {
+    "name": "Keemo Paul",
+    "profileLink": "/cricketers/keemo-paul-677081",
+    "type": "AR",
+    "base": 125
+  },
+  {
+    "name": "Odean Smith",
+    "profileLink": "/cricketers/odean-smith-820691",
+    "type": "AR",
+    "base": 75
+  },
+  {
+    "name": "Andrew Tye",
+    "profileLink": "/cricketers/andrew-tye-459508",
+    "type": "BOWL",
+    "base": 75
+  },
+  {
+    "name": "Ajay Ahlawat",
+    "profileLink": "/cricketers/ajay-ahlawat-1083126",
+    "type": "AR",
+    "base": 40
+  },
+  {
+    "name": "Corbin Bosch",
+    "profileLink": "/cricketers/corbin-bosch-594322",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mayank Gusain",
+    "profileLink": "/cricketers/mayank-gusain-1459404",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mukhtar Hussain",
+    "profileLink": "/cricketers/mukhtar-hussain-1135340",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Girinath Reddy",
+    "profileLink": "/cricketers/girinath-reddy-956033",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Jalaj Saxena",
+    "profileLink": "/cricketers/jalaj-saxena-237199",
+    "type": "AR",
+    "base": 40
+  },
+  {
+    "name": "Yajas Sharma",
+    "profileLink": "/cricketers/yajas-sharma-1460380",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sanjay Yadav",
+    "profileLink": "/cricketers/sanjay-yadav-1048841",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vishal Godara",
+    "profileLink": "/cricketers/vishal-godara-960759",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Eshan Malinga",
+    "profileLink": "/cricketers/eshan-malinga-1306214",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Samarth Nagaraj",
+    "profileLink": "/cricketers/samarth-nagaraj-1447581",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Abhishek Saini",
+    "profileLink": "/cricketers/abhishek-saini-1417913",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Dumindu Sewmina",
+    "profileLink": "/cricketers/dumindu-sewmina-1379074",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Pradyuman Singh",
+    "profileLink": "/cricketers/pradyuman-singh-1460381",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Vasu Vats",
+    "profileLink": "/cricketers/vasu-vats-1292515",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Umang Kumar",
+    "profileLink": "/cricketers/umang-kumar-1247122",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Mohamed Ali",
+    "profileLink": "/cricketers/mohamed-ali-1380109",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Atharva Ankolekar",
+    "profileLink": "/cricketers/atharva-ankolekar-1175467",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vaisakh Chandran",
+    "profileLink": "/cricketers/vaisakh-chandran-1287068",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Auqib Nabi",
+    "profileLink": "/cricketers/auqib-nabi-1159732",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Rohit Rayudu",
+    "profileLink": "/cricketers/rohit-rayudu-1083493",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Uday Saharan",
+    "profileLink": "/cricketers/uday-saharan-1292511",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ayush Vartak",
+    "profileLink": "/cricketers/ayush-vartak-1460382",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Baba Aparajith",
+    "profileLink": "/cricketers/baba-aparajith-477071",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sumit Beniwal",
+    "profileLink": "/cricketers/sumit-beniwal-1460383",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Nishunk Birla",
+    "profileLink": "/cricketers/nishunk-birla-1454648",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Digvijay Deshmukh",
+    "profileLink": "/cricketers/digvijay-deshmukh-1206410",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Lakshay Jain",
+    "profileLink": "/cricketers/lakshay-jain-1381407",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Duan Jansen",
+    "profileLink": "/cricketers/duan-jansen-595954",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Kritagya Singh",
+    "profileLink": "/cricketers/kritagya-singh-1300837",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "P Vignesh",
+    "profileLink": "/cricketers/p-vignesh-1380118",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sabhay Chadha",
+    "profileLink": "/cricketers/sabhay-chadha-1446423",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Benny Howell",
+    "profileLink": "/cricketers/benny-howell-211748",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Hemanth Kumar",
+    "profileLink": "/cricketers/hemanth-kumar-1460384",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Rohan Rana",
+    "profileLink": "/cricketers/rohan-rana-1300768",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Bharat Sharma",
+    "profileLink": "/cricketers/bharat-sharma-1273854",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Pratham Singh",
+    "profileLink": "/cricketers/pratham-singh-1083464",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Tripurana Vijay",
+    "profileLink": "/cricketers/tripurana-vijay-1292527",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Ravi Kumar Yadav",
+    "profileLink": "/cricketers/ravi-kumar-yadav-1454596",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Arjun Azad",
+    "profileLink": "/cricketers/arjun-azad-1175464",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Abhay Choudhary",
+    "profileLink": "/cricketers/abhay-choudhary-1454582",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Gaurav Gambhir",
+    "profileLink": "/cricketers/gaurav-gambhir-389613",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Shubham Garhwal",
+    "profileLink": "/cricketers/shubham-garhwal-1287019",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Tejasvi Jaiswal",
+    "profileLink": "/cricketers/tejasvi-jaiswal-1454594",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Sairaj Patil",
+    "profileLink": "/cricketers/sairaj-patil-1079560",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Madhav Tiwari",
+    "profileLink": "/cricketers/madhav-tiwari-1460385",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Kamal Tripathi",
+    "profileLink": "/cricketers/kamal-tripathi-1339046",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Prashant Chauhan",
+    "profileLink": "/cricketers/prashant-chauhan-1460386",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Yash Dabas",
+    "profileLink": "/cricketers/yash-dabas-1460387",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Dhruv Kaushik",
+    "profileLink": "/cricketers/dhruv-kaushik-1454580",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Khrievitso Kense",
+    "profileLink": "/cricketers/khrievitso-kense-1246493",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Akash Parkar",
+    "profileLink": "/cricketers/akash-parkar-714461",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vignesh Puthur",
+    "profileLink": "/cricketers/vignesh-puthur-1460388",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Tripuresh Singh",
+    "profileLink": "/cricketers/tripuresh-singh-1460345",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Vijay Yadav",
+    "profileLink": "/cricketers/vijay-yadav-1449051",
+    "type": "AR",
+    "base": 30
+  },
+  {
+    "name": "Jofra Archer",
+    "profileLink": "/cricketers/jofra-archer-669855",
+    "type": "BOWL",
+    "base": 200
+  },
+  {
+    "name": "Saurabh Netravalkar",
+    "profileLink": "/cricketers/saurabh-netravalkar-398513",
+    "type": "BOWL",
+    "base": 30
+  },
+  {
+    "name": "Hardik Tamore",
+    "profileLink": "/cricketers/hardik-tamore-1212583",
+    "type": "WK",
+    "base": 30
+  },
+  {
+    "name": "Daryl Mitchell",
+    "profileLink": "/cricketers/daryl-mitchell-381743",
+    "type": "AR",
+    "base": 200
+  }
+]
