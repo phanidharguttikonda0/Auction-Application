@@ -64,8 +64,8 @@ fn profile_routes() -> Router<AppState> {
 }
 
 fn player_routes() -> Router<AppState> {
-    Router::new().route("/get-player/:player_id", get(get_player))
-    .route("/get-stats/:stats_id", get(get_stats))
+    Router::new().route("/get-player/{player_id}", get(get_player))
+    .route("/get-stats/{stats_id}", get(get_stats))
     .layer(middleware::from_fn(authorization_check))
 }
 

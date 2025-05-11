@@ -12,7 +12,7 @@ serde_urlencoded = "0.7.1" # Form data parsing
 http-body = "1.0.1" # defines types for http request and response body, used internally by hyper, axum
 hyper = {version =  "1.6.0", features = ["full"] } # low-level fast http implementations
 jsonwebtoken = "9.3.1"
-sqlx = { version = "0.8.5", features = ["runtime-tokio", "macros", "postgres", "uuid"] }
+sqlx = { version = "0.8.5", features = ["runtime-tokio", "macros", "postgres", "uuid","chrono"] }
 uuid = {version = "1.16.0", features = ["serde", "v4"]}
 redis = {version = "0.30.0", features = ["tokio-comp"]}
 tower-http = {version =  "0.6.2", features = ["cors"] }
@@ -20,3 +20,8 @@ async-graphql = "7.0.16"
 async-graphql-axum = "7.0.16"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+sha2 = "0.10.9"
+validator = { version = "0.20.0", features = ["derive"] }
+regex = "1"
+lazy_static = "1"
+chrono = {version = "0.4.41", features = ["serde"]}
