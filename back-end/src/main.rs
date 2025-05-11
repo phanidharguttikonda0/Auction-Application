@@ -16,10 +16,11 @@ use sqlx::{Pool, Postgres};
 use crate::handlers::authentication::{forget_password, login, sign_up};
 use crate::handlers::profile::{get_profile, profile, reset_password, search};
 use crate::handlers::room_handler::{get_pool, get_public_rooms, get_remaining_teams, get_team, get_teams};
-use crate::middlewares::authentication::{authorization_check, validate_details};
+use crate::middlewares::authentication::{authorization_check};
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 use crate::auction_room::handle_ws_upgrade;
 use crate::graph_ql_fields::QueryRoot;
+use crate::models::authentication::Claims;
 
 fn init_tracing() {
     tracing_subscriber::fmt()
@@ -30,8 +31,8 @@ fn init_tracing() {
 }
 
 
-async fn server_start() -> String {
-    tracing::info!("server_started") ;
+async fn server_start(Extension(data): Extension<Claims>) -> String {
+    tracing::info!("data was {:#?}", data) ;
     tracing::trace!("server_started with server_start function") ;
     tracing::debug!("we are the function") ;
     tracing::warn!("warning occured") ;
@@ -42,7 +43,6 @@ fn authentication_routes() -> Router<AppState> {
     Router::new().route("/login", post(login))
         .route("/sign-up", post(sign_up))
         .route("/forgot-credentials", post(forget_password))
-        .layer(middleware::from_fn(validate_details))
 }
 
 
@@ -92,10 +92,10 @@ async fn main() {
     let state = AppState{ sql_database} ;
     let schema = Schema::build(QueryRoot,EmptyMutation,EmptySubscription).finish() ;
     let app = Router::new()
+        .route("/", get(server_start)).layer(middleware::from_fn(authorization_check))
         .nest("/authentication", authentication_routes())
         .nest("/rooms", room_routes())
         .nest("/user", profile_routes())
-        .route("/", get(server_start))
         .nest("/player", player_routes())
         .route("/ws", get(handle_ws_upgrade))
         .route("/graphql/{room_id}", post(graphql_handler))

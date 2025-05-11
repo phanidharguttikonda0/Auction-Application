@@ -39,3 +39,11 @@ pub struct Token {
     pub authorization: String,
 }
 
+
+#[derive(Serialize, Deserialize, Debug)]
+#[derive(Clone)]
+pub struct Claims {
+    pub username: String,
+    pub user_id: i32,
+    pub exp: i64,
+}
