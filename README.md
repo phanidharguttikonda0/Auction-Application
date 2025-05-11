@@ -8,7 +8,7 @@ Building the Application using Rust with Axum the things used in this applicatio
 
 ## Below is the ER Diagram
 
-![ER Diagram](/home/phani/My/Auction-Application/assets/ER.png)
+![ER Diagram](assets/ER.png)
 
 
 ## Back-End Routes
