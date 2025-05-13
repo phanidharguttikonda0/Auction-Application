@@ -10,14 +10,8 @@ pub async fn authorization_check(mut req: Request, next: Next ) -> Result<Respon
     match auth_header {
         Some(auth_header) => {
             tracing::info!("{}", auth_header.to_str().unwrap());
-            if !auth_header.to_str().unwrap().starts_with("Bearer ") {
-                tracing::error!("Invalid authorization header with no Bearer");
-                return Err(StatusCode::UNAUTHORIZED)
-            }
-            let token = auth_header.to_str().unwrap().replace("Bearer ", "");
-            tracing::info!("Authorization header found: {}", token);
-            let data = decode::<Claims>(&token, &DecodingKey::from_secret(b"phani"), &Validation::default()).unwrap() ;
-            req.extensions_mut().insert(data.claims) ; // where in request extensions we will add the data from the middlewares to it
+            let data = authorization_decode(auth_header.to_str().unwrap().to_string()).unwrap();
+            req.extensions_mut().insert(data) ; // where in request extensions we will add the data from the middlewares to it
             // in handlers we can get the data we added in Extensions by using Extensions extractor as follows
             // handler(Extensions(data) : Extensions<Claims>) so it returns the Claims type data that we inserted to the extensions
             Ok(next.run(req).await)
@@ -28,6 +22,17 @@ pub async fn authorization_check(mut req: Request, next: Next ) -> Result<Respon
         }
     }
 
+}
+
+pub fn authorization_decode(token: String) -> Option<Claims> {
+    if !token.starts_with("Bearer ") {
+        tracing::error!("Invalid authorization header with no Bearer");
+        return None
+    }
+    let token = token.replace("Bearer ", "");
+    tracing::info!("Authorization header found: {}", token);
+    let data = decode::<Claims>(&token, &DecodingKey::from_secret(b"phani"), &Validation::default()).unwrap() ;
+    Some(data.claims)
 }
 
 pub async fn get_authorization_header(username: String, user_id: i32) -> String {

@@ -9,4 +9,20 @@ pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<A
 
 async fn handle_ws(mut socket: WebSocket,connections:AppState) {
     tracing::info!("New connection was created");
-} 
+}
+
+/*
+websocket need to take care of :
+    decode the authorization header and get the actual values
+room-creation :
+    -> get the team-selected,accessibility into String.
+    -> call the room_create handler if successfully call room-join.
+    -> Now create an Redis Schema for that Room.
+room-join :
+    -> first need to be check whether the room was in waiting or ongoing state.
+    -> then check whether the user exists or not.
+    -> if exists then allow him to join by sending the Room type data.
+    -> else if room was not in ongoing state join the room and then send room-id
+    -> else send a string with Invalid Room Id
+
+*/
