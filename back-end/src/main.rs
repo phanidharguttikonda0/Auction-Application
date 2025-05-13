@@ -15,7 +15,7 @@ use axum::{routing::{get, post}, middleware};
 use sqlx::{Pool, Postgres};
 use crate::handlers::authentication::{forget_password, login, sign_up};
 use crate::handlers::profile::{get_profile, profile, reset_password, search};
-use crate::handlers::room_handler::{get_pool, get_public_rooms, get_remaining_teams, get_team, get_teams};
+use crate::handlers::room_handler::{get_pool, get_public_rooms,  get_team, get_teams};
 use crate::middlewares::authentication::{authorization_check};
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 use crate::auction_room::handle_ws_upgrade;
@@ -47,7 +47,7 @@ fn authentication_routes() -> Router<AppState> {
 
 
 fn room_routes() -> Router<AppState> {
-    Router::new().route("/get-remaining-teams/{room_id}", get(get_remaining_teams))
+    Router::new()
         .route("/get-public-rooms", get(get_public_rooms))
         .route("/get-team/{room_id}/{team_name}", get(get_team))
         .route("/get-teams/{room_id}", get(get_teams))
