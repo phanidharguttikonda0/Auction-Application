@@ -122,34 +122,40 @@ pub async fn get_team(State(state): State<AppState>, Path((room_id, team_name)):
 
 }
 
+fn get_pool_mapping(key: &str) -> Option<(i32, &'static str)> {
+    match key {
+        "A" => Some((200, "BAT")),
+        "B" => Some((200, "BOWL")),
+        "C" => Some((200, "ALL")),
+        "D" => Some((150, "BAT")),
+        "E" => Some((150, "BOWL")),
+        "F" => Some((150, "ALL")),
+        "G" => Some((100, "BAT")),
+        "H" => Some((100, "BOWL")),
+        "I" => Some((100, "ALL")),
+        "J" => Some((75, "BAT")),
+        "K" => Some((75, "BOWL")),
+        "L" => Some((75, "ALL")),
+        "M" => Some((50, "BAT")),
+        "N" => Some((50, "BOWL")),
+        "O" => Some((50, "ALL")),
+        "P" => Some((40, "BAT")),
+        "Q" => Some((40, "BOWL")),
+        "R" => Some((40, "ALL")),
+        "S" => Some((30, "BAT")),
+        "T" => Some((30, "BOWL")),
+        "U" => Some((30, "ALL")),
+        _ => None,
+    }
+}
 
 
 
-pub async fn get_pool(State(state): State<AppState>, Path(pool_id): Path<i32>) -> Json<Vec<String>> {
-    // if A (200L batsmans) B(200L bowlers), C(200L bowlers)
-    let mut pool_mapping :HashMap<String, (i32, String)> = HashMap::new();
-    pool_mapping.insert(String::from("A"), (200, String::from("BAT")));
-    pool_mapping.insert(String::from("B"), (200, String::from("BOWL")));
-    pool_mapping.insert(String::from("C"), (200, String::from("ALL")));
-    pool_mapping.insert(String::from("D"), (150, String::from("BAT")));
-    pool_mapping.insert(String::from("E"), (150, String::from("BOWL")));
-    pool_mapping.insert(String::from("F"), (150, String::from("ALL")));
-    pool_mapping.insert(String::from("G"), (100, String::from("BAT")));
-    pool_mapping.insert(String::from("H"), (100, String::from("BOWL")));
-    pool_mapping.insert(String::from("I"), (100, String::from("ALL")));
-    pool_mapping.insert(String::from("J"), (75, String::from("BAT")));
-    pool_mapping.insert(String::from("K"), (75, String::from("BOWL")));
-    pool_mapping.insert(String::from("L"), (75, String::from("ALL")));
-    pool_mapping.insert(String::from("M"), (50, String::from("BAT")));
-    pool_mapping.insert(String::from("N"), (50, String::from("BOWL")));
-    pool_mapping.insert(String::from("O"), (50, String::from("ALL")));
-    pool_mapping.insert(String::from("P"), (40, String::from("BAT")));
-    pool_mapping.insert(String::from("Q"), (40, String::from("BOWL")));
-    pool_mapping.insert(String::from("R"), (40, String::from("ALL")));
-    pool_mapping.insert(String::from("S"), (30, String::from("BAT")));
-    pool_mapping.insert(String::from("T"), (30, String::from("BOWL")));
-    pool_mapping.insert(String::from("U"), (30, String::from("ALL")));
-    
+
+pub async fn get_pool(State(state): State<AppState>, Path(pool_id): Path<String>) -> Json<Vec<String>> {
+
+    let (amount, pool_type) = get_pool_mapping(&pool_id).unwrap();
+    // from this we are going to fetch the players with player_id and name and their role and base_price
     Json(vec![]) // returning player-names along with their id's and stats id
 }
 
