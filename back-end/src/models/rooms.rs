@@ -93,6 +93,7 @@ pub struct NewJoiner { // will be sent to the rest of room member when a new pla
 pub struct TeamPlayer {
     pub player_id: i32,
     pub player_name: String,
+    pub role: String,
     pub amount: i32,
 }
 

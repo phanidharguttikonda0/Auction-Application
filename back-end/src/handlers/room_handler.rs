@@ -110,7 +110,7 @@ pub async fn get_team(State(state): State<AppState>, Path((room_id, team_name)):
 
 
     let players =
-        sqlx::query_as::<_, TeamPlayer>("select s.player_id,s.amount,pp.name from sold_players s INNER JOIN participants p on s.participant_id=p.id INNER JOIN players pp on pp.id=s.player_id where p.room_id=($1) and p.team_selected=($2)")
+        sqlx::query_as::<_, TeamPlayer>("select s.player_id,s.amount,pp.name,pp.role from sold_players s INNER JOIN participants p on s.participant_id=p.id INNER JOIN players pp on pp.id=s.player_id where p.room_id=($1) and p.team_selected=($2)")
         .bind(Uuid::parse_str(&room_id).unwrap()).bind(&team_name).fetch_all(&state.sql_database).await ;
 
     match players {
