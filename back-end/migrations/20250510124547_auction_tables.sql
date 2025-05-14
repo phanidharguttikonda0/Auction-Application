@@ -56,7 +56,7 @@ CREATE TABLE players (
                          id SERIAL PRIMARY KEY,
                          name VARCHAR(120) NOT NULL,
                          DOB DATE NOT NULL,
-                         TYPE TEXT CHECK (TYPE IN ('BAT', 'BOWL', 'AR')) NOT NULL,
+                         role TEXT CHECK (TYPE IN ('BAT', 'BOWL', 'AR')) NOT NULL,
                          base_price INT NOT NULL,
                          stats_id INT REFERENCES stats(id),
                          country VARCHAR(25) NOT NULL
