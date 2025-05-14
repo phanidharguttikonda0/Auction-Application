@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use validator::Validate;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Profile {
@@ -14,7 +15,8 @@ pub struct Auction {
     pub participant_id: i32
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Validate)]
 pub struct Password {
+    #[validate(length(min = 8, message = "Password must be at least 8 characters long"))]
     pub password: String,
 }

@@ -1,7 +1,8 @@
 
 use axum::extract::{State,Path, Request};
-use axum::{Form, Json};
-
+use axum::{Extension, Form, Json};
+use crate::middlewares::authentication::hash_password;
+use crate::models::authentication::Claims;
 use crate::models::profile::{Password, Profile};
 
 pub async fn profile(State(state): State<crate::AppState>,req: Request) -> Json<Profile> {
@@ -28,9 +29,25 @@ pub async fn search(State(state): State<crate::AppState>, Path(username): Path<S
 
 }
 
-pub async fn reset_password(State(state): State<crate::AppState>, Form(password):Form<Password>) -> Json<bool> {
-    // passing direct new password
-    Json(true)
+pub async fn reset_password(State(state): State<crate::AppState>, Extension(claims): Extension<Claims>, Form(password):Form<Password>) -> Json<bool> {
+
+    // hash the password
+    let hashed_password = hash_password(password.password);
+
+    let done = sqlx::query("UPDATE users SET password = $1 WHERE username = $2")
+        .bind(&claims.username).execute(&state.sql_database).await ;
+
+    match done {
+        Ok(done) => {
+            tracing::info!("updated password") ;
+            Json(true)
+        },
+        Err(err) => {
+            tracing::error!("error was {}",err) ;
+            Json(false)
+        }
+    }
+    
 }
 
 pub async fn get_profile(State(state): State<crate::AppState>, Path(username): Path<String>) -> Json<Profile> {
