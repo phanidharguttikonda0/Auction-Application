@@ -30,12 +30,12 @@ pub async fn search(State(state): State<crate::AppState>, Path(username): Path<S
 }
 
 pub async fn reset_password(State(state): State<crate::AppState>, Extension(claims): Extension<Claims>, Form(password):Form<Password>) -> Json<bool> {
-
+    tracing::info!("reset-password handler was going to execute") ;
     // hash the password
     let hashed_password = hash_password(password.password);
 
     let done = sqlx::query("UPDATE users SET password = $1 WHERE username = $2")
-        .bind(&claims.username).execute(&state.sql_database).await ;
+        .bind(&hashed_password).bind(&claims.username).execute(&state.sql_database).await ;
 
     match done {
         Ok(done) => {
@@ -47,7 +47,7 @@ pub async fn reset_password(State(state): State<crate::AppState>, Extension(clai
             Json(false)
         }
     }
-    
+
 }
 
 pub async fn get_profile(State(state): State<crate::AppState>, Path(username): Path<String>) -> Json<Profile> {

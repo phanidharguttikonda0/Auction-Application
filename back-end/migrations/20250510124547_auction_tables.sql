@@ -56,7 +56,7 @@ CREATE TABLE players (
                          id SERIAL PRIMARY KEY,
                          name VARCHAR(120) NOT NULL,
                          DOB DATE NOT NULL,
-                         role TEXT CHECK (TYPE IN ('BAT', 'BOWL', 'AR')) NOT NULL,
+                         role TEXT CHECK (role IN ('BAT', 'BOWL', 'AR')) NOT NULL,
                          base_price INT NOT NULL,
                          stats_id INT REFERENCES stats(id),
                          country VARCHAR(25) NOT NULL
@@ -80,7 +80,9 @@ CREATE TABLE unsold_players (
 CREATE INDEX idx_participants_room_id ON participants(room_id);
 CREATE INDEX idx_participants_participant_id ON participants(participant_id);
 CREATE INDEX idx_players_country ON players(country);
-CREATE INDEX idx_players_type ON players(TYPE);
+CREATE INDEX idx_players_role ON players(role);
 CREATE INDEX idx_stats_from ON stats(stats_from);
 CREATE INDEX idx_sold_players_room_id ON sold_players(room_id);
 CREATE INDEX idx_unsold_players_room_id ON unsold_players(room_id);
+CREATE INDEX idx_user_id ON users(id) ;
+CREATE INDEX idx_user_username ON users(username);
