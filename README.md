@@ -15,12 +15,20 @@ Building the Application using Rust with Axum the things used in this applicatio
 
 Authentication-Routes:
 
+These are the Authentication routes for sign-in and sign-up
+
     /authentication/login - Post Url encoded - username and password
     /authentication/sign-up Post Url encoded - mail_id , username, password
     and DOB.
     return-type :
     {
-        Authorization_header:
+        Ok : {
+            authorization:
+        }
+    }
+    if failed then return-type :
+    {
+        Err : "represents error"
     }
     /authentication/forget-password same but only mail_id
 
@@ -29,20 +37,71 @@ Authentication-Routes:
 In Home Page
 
     -> public-rooms -> /rooms/get-public-rooms
+    response :
+    {
+        Ok : Vec<(Uuid,i32)>, // (containing room-ids,max_participants_allowed)
+    }
+    if response-fails then :
+    {
+        Err : String
+    }
+
+    [ Way to code front-end for public-rooms
+
+        -> By default each room shows the room-id along with max_players
+        -> users can click the room-id and then list of teams that are selected will be appears (/rooms/get-teams/{room_id} GET) it returns the rooms that are been selected , so except those teams make sure the remaining teams to be choosen by marking those selected teams as gray shade by diabling them to click. when user clicks the team. then join-room should be executed.
+    ]
+
+    /rooms/get-teams/{room_id} -> returns
+    {
+        Ok : Vec<String>
+    }
+
+
 
     -> create-room -> ws://localhost:9090/ [websocket connection will be created here]
-    {
+    requested-data :
+     {
+             authorization_header: String,
+             max_players: u8, // 10 IS MAX AND 4 IS MIN
+             team: Team,
+             room_type: RoomType -> ('PUBLIC' || 'PRIVATE')
+     }
 
+    response-data :
+    {
+        pub room_id: Uuid,
+        pub room_type: RoomType, ('PUBLIC', 'PRIVATE')
+        pub max_players: u8,
+        pub players_teams: Vec<(i32, String)>, (participant_id, team_selected)
+        pub status: RoomStatus -> ('WAITING', 'ONGOING','COMPLETED')
     }
 
 
 
     -> join-room -> ws://localhost:9090/ [or here the websocket connection will be created]
+    requested-data :
     {
-
+        authorization_header: String,
+        room_id: Uuid,
+        team_selected: Team // MAKE SURE TEAM-NAME IN CAPITALS
     }
 
+    response-data :
+    {
+        pub room_id: Uuid,
+        pub room_type: RoomType, ('PUBLIC', 'PRIVATE')
+        pub max_players: u8,
+        pub players_teams: Vec<(i32, String)>, (participant_id, team_selected)
+        pub status: RoomStatus -> ('WAITING', 'ONGOING','COMPLETED')
+    }
+
+
     -> search/:username -> for live username search(sending data via path)
+    response-data :
+    {
+        Ok: Vec<{username, user_id}>
+    }
 
     -> profile -> user/:username returns profile
     return-type:
@@ -56,7 +115,11 @@ In Home Page
     -> reset-password inside profile -> user/reset-password
     request: (url-encoded format)
     {
-        new_password: String
+        password: String
+    }
+    RESPONSE :
+    {
+        TRUE OR FALSE
     }
 
 
@@ -66,13 +129,16 @@ In Profile Page:
 
         -> rooms/get-teams/{room_id} return teams that participated in the auction along with owners usernames(owners are nothing but users).
         return-type : {
-            teams: [{each-team-name, played_user_id:int, username}]
+            Ok: Vec<String>
         }
-
+        else :
+        {
+            Err: ""
+        }
 
         -> rooms/get-team/{room_id}/{team_name} returns team that the players bought by them (only player-id and player name and amount bought for will be returned).
         return-type : {
-            players: [ {player-id:int, player-name: String, role:String, amount: int} ]
+            Ok: [ {player-id:int, player-name: String, role:String, amount: int} ]
         }
 
 
@@ -80,16 +146,28 @@ In Profile Page:
         To get in-detailed player details, the below should be accessed
         -> player/get-player/:player_id (it returns everything except stats,it included stats_id)
         return-type :
-           {player_id, player_name, role, age, stats_id, capped, country}
-
+           {
+               Ok: {player_id, player_name, role, age, stats_id, capped, country}
+           }
+        else:
+        {
+            Err: String
+        }
 
 
         -> player/get-stats/:stats_id (we can get back stats from the stats_id).
         return-type :
         {
-            stats_id, matches, runs, average, fifties, hundreads, wickets,
-            strike_rate, five_wickets, three_wickets
+            Ok: {
+                stats_id, matches, runs, average, fifties, hundreads, wickets,
+                strike_rate, five_wickets, three_wickets
+            }
         }
+
+        else :
+            {
+                Err: String
+            }
 
         -> we can also get unsold players of that auction as well using graphql.
         return-type :
