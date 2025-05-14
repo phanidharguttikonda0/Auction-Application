@@ -62,16 +62,16 @@ pub struct CreateRoom { // the data passed to the create_room handler in this wa
 
 #[derive(Debug, Deserialize)]
 pub struct PlayerSold {
-    player_id: i32,
-    participant_id: i32,
-    amount: u16,
-    room_id: String
+    pub player_id: i32,
+    pub participant_id: i32,
+    pub amount: i32,
+    pub room_id: Uuid
 }
 
 #[derive(Debug, Deserialize)]
 pub struct PlayerUnsold {
-    player_id: i32,
-    room_id: String
+    pub player_id: i32,
+    pub room_id: Uuid
 }
 
 #[derive(Debug,Serialize)]
@@ -94,4 +94,12 @@ pub struct TeamPlayer {
     pub player_id: i32,
     pub player_name: String,
     pub amount: i32,
+}
+
+#[derive(sqlx::FromRow, Debug, Serialize)]
+pub struct PoolPlayer{
+    pub id: i32,
+    pub name: String,
+    pub role: String,
+    pub base_price: i32,
 }

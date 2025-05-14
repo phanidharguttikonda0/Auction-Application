@@ -1,6 +1,6 @@
 use serde::Serialize;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, sqlx::FromRow)]
 pub struct Player{
     pub id: i32,
     pub name: String,
@@ -11,7 +11,7 @@ pub struct Player{
     pub role: String,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, sqlx::FromRow)]
 pub struct Stats{
     pub id: i32,
     pub matches: Option<i32>,
