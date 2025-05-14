@@ -5,7 +5,7 @@ use sqlx::{Error, Postgres, Transaction};
 use uuid::Uuid;
 use crate::AppState;
 use crate::middlewares::authentication::authorization_decode;
-use crate::models::rooms::{CreateRoom, JoinRoom, PlayerSold, PlayerUnsold, Room, RoomCreation, RoomJoin, RoomType, Team, TeamPlayer};
+use crate::models::rooms::{CreateRoom, JoinRoom, PlayerSold, PlayerUnsold, PoolPlayer, Room, RoomCreation, RoomJoin, RoomType, Team, TeamPlayer};
 
 pub async fn room_creation(room: CreateRoom,connections: &AppState) -> Result<Uuid,String> {
 
@@ -68,6 +68,8 @@ pub async fn room_join(room_join: JoinRoom, connections: &AppState) -> Result<i3
 
 pub async fn get_teams(State(state): State<AppState>, Path(room_id): Path<String>) -> Json<Result<Vec<String>, String>> {
 
+    // first we need to see the redis to get the data , if redis doesn't exists then we need to fetch from the psql
+
     let teams = sqlx::query_scalar::<_,String>("select team_selected from participants where room_id=($1)")
         .bind(&Uuid::parse_str(&room_id).unwrap()).fetch_all(&state.sql_database).await ;
 
@@ -103,6 +105,9 @@ pub async fn get_public_rooms(State(state): State<AppState>) -> Json<Result<Vec<
 
 
 pub async fn get_team(State(state): State<AppState>, Path((room_id, team_name)): Path<(String,String)>) -> Json<Result<Vec<TeamPlayer>,String>> {
+
+    // first we need to see the redis to get the data , if redis doesn't exists then we need to fetch from the psql
+
 
     let players =
         sqlx::query_as::<_, TeamPlayer>("select s.player_id,s.amount,pp.name from sold_players s INNER JOIN participants p on s.participant_id=p.id INNER JOIN players pp on pp.id=s.player_id where p.room_id=($1) and p.team_selected=($2)")
@@ -152,18 +157,82 @@ fn get_pool_mapping(key: &str) -> Option<(i32, &'static str)> {
 
 
 
-pub async fn get_pool(State(state): State<AppState>, Path(pool_id): Path<String>) -> Json<Vec<String>> {
+pub async fn get_pool(State(state): State<AppState>, Path(pool_id): Path<String>) -> Json<Result<Vec<PoolPlayer>,String>> {
 
     let (amount, pool_type) = get_pool_mapping(&pool_id).unwrap();
     // from this we are going to fetch the players with player_id and name and their role and base_price
-    Json(vec![]) // returning player-names along with their id's and stats id
+    let players = sqlx::query_as::<_,PoolPlayer>("select id,name,role,base_price from players where base_price=($1) AND role=($2)")
+        .bind(amount).bind(pool_type).fetch_all(&state.sql_database).await ;
+
+    match players {
+        Ok(players) => {
+            tracing::info!("Got the players for the pool_id of {}", pool_id) ;
+            Json(Ok(players))
+        },
+        Err(err) => {
+            tracing::error!("Error was : {}",err) ;
+            Json(Err(String::from("Invalid pool_id pools are available from A to U")))
+        }
+    }
+
 }
 
 
-pub async fn player_sold(player: PlayerSold) -> String {
-    String::from("MumbaiIndians") // adding the player to the sqlx and redis, returning the team bought that player
+pub async fn player_sold(player: PlayerSold, connections: &AppState) -> String {
+
+    let sold = sqlx::query_scalar::<_, String>(
+        "
+    WITH inserted AS (
+        INSERT INTO sold_players (participant_id, player_id, amount, room_id)
+        VALUES ($1, $2, $3, $4)
+        RETURNING participant_id
+    )
+    SELECT p.team_selected
+    FROM inserted
+    JOIN participants p ON inserted.participant_id = p.id
+    "
+    )
+        .bind(player.participant_id)
+        .bind(player.player_id)
+        .bind(player.amount)
+        .bind(player.room_id)
+        .fetch_one(&connections.sql_database)
+        .await;
+
+
+    match sold {
+        Ok(sold_team) => {
+            tracing::info!("solded to {}",sold_team) ;
+            sold_team
+        },
+        Err(err) => {
+            tracing::error!("error was {}",err) ;
+            String::from("")
+        }
+    }
+
 }
 
-pub async fn player_unsold(player: PlayerUnsold) -> bool {
-    true // adding to unsold players list
+pub async fn player_unsold(player: PlayerUnsold, connections: &AppState) -> bool {
+
+    let unsold = sqlx::query("insert into unsold_players (player_id, room_id) values ($1,$2)")
+        .bind(player.player_id).bind(player.room_id).execute(&connections.sql_database).await ;
+
+    match unsold {
+        Ok(done) => {
+            if done.rows_affected() > 0 {
+                tracing::info!("added to unsold players successfully") ;
+                true
+            }else {
+                tracing::warn!("rows doesn't effected") ;
+                false
+            }
+            
+        },
+        Err(err) => {
+            tracing::error!("error was {}",err) ;
+            false
+        }
+    }
+
 }
