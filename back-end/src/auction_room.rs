@@ -24,5 +24,7 @@ room-join :
     -> if exists then allow him to join by sending the Room type data.
     -> else if room was not in ongoing state join the room and then send room-id
     -> else send a string with Invalid Room Id
-
+player-sold :
+    -> calling the player-sold handler it will add the player to the sql
+    -> adding the player to the redis as well
 */
