@@ -86,9 +86,9 @@ pub async fn get_teams(State(state): State<AppState>, Path(room_id): Path<String
 
 }
 
-pub async fn get_public_rooms(State(state): State<AppState>) -> Json<Result<Vec<String>, String>> {
+pub async fn get_public_rooms(State(state): State<AppState>) -> Json<Result<Vec<(Uuid,i32)>, String>> {
 
-   let public_rooms = sqlx::query_scalar::<_,String>("select id from rooms where accessibility='PUBLIC' AND room_status='WAITING'")
+   let public_rooms = sqlx::query_scalar::<_,(Uuid,i32)>("select id,max_participants from rooms where accessibility='PUBLIC' AND room_status='WAITING'")
        .fetch_all(&state.sql_database).await ;
 
     match public_rooms {
