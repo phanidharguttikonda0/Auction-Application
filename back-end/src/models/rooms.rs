@@ -91,8 +91,8 @@ pub struct NewJoiner { // will be sent to the rest of room member when a new pla
 
 #[derive(sqlx::FromRow, Debug, Serialize)]
 pub struct TeamPlayer {
-    pub player_id: i32,
-    pub player_name: String,
+    pub id: i32,
+    pub name: String,
     pub role: String,
     pub amount: i32,
 }

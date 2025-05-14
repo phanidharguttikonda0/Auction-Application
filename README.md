@@ -219,12 +219,30 @@ Inside room apart from biddings
     -> get unsold players using graph ql
     /graphql -> need to send the data that is required
 
-    -> get players list by pool  (/rooms/get-pool/{pool_id} -> returns players name, player_id, base_price)
-    return-type : {
+    -> get players list by pool  (/rooms/get-pool/{pool_id} ->
 
+    return-type : {
+        Ok : [{id, name, role, base_price},..]
+    }
+    else
+    {
+        Err: String
     }
 
     -> get each team bought players -> (/rooms/get-team/{room_id}/{team_name})
+
+    response-data :
+        {
+            Ok: [{id, name, role, amount}]
+        }
+
+    else
+        {
+            Err: String
+        }
+
+
+
 
     -> we can add the players in to intrested players list , such that
        those will be re-visited again after the each team has completed buying 16 players. (/rooms/add-to-intrested/{player_id} so at last all players intrested players whom are unsold are not yet came will be sent to the server and stored in the redis).
