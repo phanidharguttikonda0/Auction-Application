@@ -1,11 +1,11 @@
 use std::os::linux::raw::stat;
-use axum::{extract::{State, Path, Json}, http::StatusCode};
+use axum::{extract::{State, Path, Json}, http::StatusCode, Form};
 use std::collections::HashMap;
 use sqlx::{Error, Postgres, Transaction};
 use uuid::Uuid;
 use crate::AppState;
 use crate::middlewares::authentication::authorization_decode;
-use crate::models::rooms::{CreateRoom, JoinRoom, PlayerSold, PlayerUnsold, PoolPlayer, Room, RoomCreation, RoomJoin, RoomType, Team, TeamPlayer};
+use crate::models::rooms::{CreateRoom, IntrestedPlayer, JoinRoom, PlayerSold, PlayerUnsold, PoolPlayer, Room, RoomCreation, RoomJoin, RoomType, Team, TeamPlayer};
 
 pub async fn room_creation(room: CreateRoom,connections: &AppState) -> Result<Uuid,String> {
 
@@ -234,5 +234,13 @@ pub async fn player_unsold(player: PlayerUnsold, connections: &AppState) -> bool
             false
         }
     }
+
+}
+
+pub async fn add_to_intrested_players(State(state): State<AppState>, Form(player): Form<IntrestedPlayer>) -> Json<bool> {
+
+    // here we are adding it to the redis not the psql, once auction completed no need of intrested players list
+
+    Json(true)
 
 }
