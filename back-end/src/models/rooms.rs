@@ -1,6 +1,7 @@
+use axum::extract::ws::Message;
 use serde::{Deserialize, Serialize};
+use tokio::sync::mpsc::UnboundedSender;
 use uuid::Uuid;
-use crate::models::players::Player;
 
 #[derive(Debug, Deserialize)]
 pub struct RoomCreation { // the data passed to the websocket in the following way
@@ -132,3 +133,9 @@ pub struct RedisRoom { // redis storing room-data
 /*
 room_id : RedisRoom
 */
+
+#[derive(Debug)]
+pub struct ParticipantsConnections {
+    pub participant_id: i32,
+    pub connection: UnboundedSender<Message>
+}

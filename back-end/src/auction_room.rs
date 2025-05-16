@@ -1,6 +1,10 @@
+use std::time::Duration;
+use async_graphql::futures_util::{SinkExt, StreamExt};
 use axum::{extract::{WebSocketUpgrade, State}};
 use axum::extract::{ws::WebSocket, Path};
+use axum::extract::ws::Message;
 use axum::response::IntoResponse;
+use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
 
@@ -10,6 +14,111 @@ pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<A
 
 async fn handle_ws(mut socket: WebSocket,connections:AppState, room_id:String,participant_id:i32) {
     tracing::info!("New connection was created");
+    let (tx, mut rx) = unbounded_channel::<Message>();
+    let second_connection = connections.clone();
+
+    let (mut sender, mut reciever) = socket.split();
+    tokio::spawn(async move {
+        while let Some(msg) = rx.recv().await {
+            if tokio::time::timeout(Duration::from_secs(12), sender.send(msg)).await.is_err() { // if the message was not reached to the client with in 12 seconds then user connection will be removed , so user needs to re-join again
+
+                tracing::error!("User was not able to reach messages on time");
+
+                if let Err(err) = sender.close().await { // if error occurs while closing this block executes
+                    tracing::error!("Error while closing the connection : {:?}",err);
+                }
+                let mut read_sockets = second_connection.websocket_connections.read() ;
+
+                match read_sockets {
+                    Ok(read_sockets) => {
+                        let participants_list = read_sockets.get(&room_id) ;
+                        let participants_list = participants_list.unwrap();
+                        let mut index:usize = 0 ;
+                        for participant in participants_list {
+                            if participant.participant_id == participant_id {
+                                let mut write_socket = second_connection.websocket_connections.write().unwrap() ;
+                                let mut participants_list = write_socket.get_mut(&room_id).unwrap() ;
+                                participants_list.remove(index) ;
+                                drop(write_socket);
+                                break;
+                            }
+                        }
+                    },
+                    Err(err) => {
+                        tracing::error!("Error while writing to the websocket connections : {:?}",err);
+                    }
+                }
+
+                break;
+
+            }
+        }
+    }) ;
+
+
+
+
+    while let Some(msg) = reciever.next().await { // where we actually recieve messages from the client
+
+        match msg {
+            Ok(msg) => {
+                match msg {
+                    Message::Text(text) => {
+                        tracing::info!("Text message received : {:?}", text) ;
+                        
+                        
+                        
+                        
+                        
+                        
+                    },
+                    Message::Binary(bin) => {
+                        tracing::info!("Binary message received : {:?}",bin);
+                    },
+                    Message::Ping(bin) => {
+                        tracing::info!("Ping Message received : {:?}",bin) ;
+                    },
+                    Message::Pong(bin) => {
+                        tracing::info!("Pong Message received : {:?}",bin) ;
+                    },
+                    Message::Close(reason) => { // here client closes the connection,
+                        // but no need to close because when another notification we are sending to all
+                        // participants if the user weren't recieved then user automatically will be removed
+                        // and also while adding the new connection we will check whether the connection
+                        // for the already existing user was there or not , if it's there we will be
+                        // overided the existing and then we will update with new one, in room-join request
+                        tracing::info!("Client closed the connection : {:?}",reason);
+                        break;
+                    }
+                }
+            },
+            Err(err) => {
+                tracing::error!("Error occured while recieving messages from the client : {:?}",err);
+            }
+        }
+
+
+    }
+
+}
+
+
+
+async fn broadcast_message(msg: Message, room_id: String,state: &mut AppState) {
+
+    let mut read_sockets = state.websocket_connections.read().unwrap() ;
+    let participants_list = read_sockets.get(&room_id).unwrap() ;
+    
+    for participant in participants_list {
+        
+        if let Err(err) = participant.connection.send(msg.clone()) {
+            tracing::error!("Error while sending message to the client : {:?}",err);
+        }else{
+            tracing::info!("Message was sent to the client successfully");   
+        }
+        
+    }
+     
 }
 
 /*

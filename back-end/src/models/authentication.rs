@@ -16,7 +16,7 @@ pub struct SignUp {
     pub mail_id: String,
     #[validate(length(min = 8, message = "Password should be at least 8 characters long"))]
     pub password: String,
-    pub DOB: NaiveDate
+    pub dob: NaiveDate
 }
 
 #[derive(Deserialize, Debug, Validate)]

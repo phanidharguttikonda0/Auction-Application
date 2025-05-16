@@ -4,7 +4,7 @@ mod middlewares;
 mod graph_ql_fields;
 mod auction_room;
 
-
+use std::sync::{Arc, RwLock};
 use async_graphql::{EmptyMutation, EmptySubscription, Schema};
 use handlers::players::{get_player, get_stats};
 use tracing_subscriber::EnvFilter;
@@ -18,9 +18,12 @@ use crate::handlers::profile::{get_profile, profile, reset_password, search};
 use crate::handlers::room_handler::{add_to_intrested_players, get_pool, get_public_rooms, get_team, get_teams};
 use crate::middlewares::authentication::{authorization_check};
 use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
+use std::collections::HashMap;
+use redis::Client;
 use crate::auction_room::handle_ws_upgrade;
 use crate::graph_ql_fields::QueryRoot;
 use crate::models::authentication::Claims;
+use crate::models::rooms::ParticipantsConnections;
 
 fn init_tracing() {
     tracing_subscriber::fmt()
@@ -78,9 +81,19 @@ async fn graphql_handler(Path(room_id): Path<String>, schema: Extension<Schema<Q
 #[derive(Clone)]
 pub struct AppState {
     pub sql_database: Pool<Postgres>,
+    pub websocket_connections: Arc<RwLock<HashMap<String,Vec<ParticipantsConnections>>>>,
+    pub redis_connection: Client
 }
 
-
+impl AppState {
+    pub fn new(sql_database: Pool<Postgres>, redis_connection: Client) -> Self {
+        Self {
+            sql_database,
+            websocket_connections: Arc::new(RwLock::new(HashMap::new())),
+            redis_connection
+        }
+    }
+}
 
 #[tokio::main]
 async fn main() {
@@ -90,7 +103,11 @@ async fn main() {
     //if specify RUST_LOG=info then from info to error everything will stdout
 
     let sql_database = sqlx::Pool::connect("postgres://postgres:phani@localhost:5432/auction").await.unwrap() ;
-    let state = AppState{ sql_database} ;
+    let redis_connection = Client::open("redis://127.0.0.1:6379/").unwrap() ;
+
+    let state = AppState::new(sql_database, redis_connection) ;
+
+    
     let schema = Schema::build(QueryRoot,EmptyMutation,EmptySubscription).finish() ;
     let app = Router::new()
         .route("/", get(server_start)).layer(middleware::from_fn(authorization_check))
