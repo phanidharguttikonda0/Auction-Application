@@ -7,16 +7,16 @@ use axum::response::IntoResponse;
 use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
-use crate::handlers::redis_handlers::redis_room_creation;
+use crate::handlers::redis_handlers::{get_Room, is_in_waiting, new_participant, participant_exists, redis_room_creation, room_exists};
 use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room};
 use crate::middlewares::authentication::authorization_decode;
-use crate::models::rooms::{CreateRoom, CurrentBid, JoinRoom, Room, RoomCreation, RoomJoin, RoomStatus};
+use crate::models::rooms::{CreateRoom, CurrentBid, JoinRoom, NewJoiner, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
 
 pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, participant_id)):Path<(String, i32)>) -> impl IntoResponse{
     ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,participant_id))
 } // while establishing connection for initial request we need to send these room-id and participant-id
 
-async fn handle_ws(mut socket: WebSocket,connections:AppState, room_id:String,participant_id:i32) {
+async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:String, participant_id:i32) {
     tracing::info!("New connection was created");
     let (tx, mut rx) = unbounded_channel::<Message>();
     let second_connection = connections.clone();
@@ -136,7 +136,88 @@ async fn handle_ws(mut socket: WebSocket,connections:AppState, room_id:String,pa
                                 }
                             }
 
-                        }else if let Ok(room_join) = room_join {}else if let Ok(bid) = bid {}else{
+                        }else if let Ok(room_join) = room_join {
+                            // firstly let's check room is exists or not if then check user already exists or not
+                            // before that also check whether the room is in waiting state or not
+
+                            let claims = authorization_decode(room_join.authorization_header) ;
+
+                            match claims {
+                                Some(claims) => {
+                                    // let's check whether user exists or not using redis
+                                    if room_exists(claims.user_id, &connections.redis_connection).await {
+                                        let val = participant_exists(claims.user_id,Uuid::to_string(&room_join.room_id), &connections.redis_connection).await ;
+                                        if  val.0 {
+                                            // he already exists, so just store the new connection and return the room-details
+                                            store_new_connection(Uuid::to_string(&room_join.room_id),val.1,&mut connections).await ;
+                                            tx.send(Message::from(
+                                                serde_json::to_string::<Room>(&get_Room(Uuid::to_string(&room_join.room_id), &connections.redis_connection).await).unwrap()
+                                            )).unwrap();
+                                            // as he was already a member, so no need to send a response to the participants
+                                        }else{
+                                            if is_in_waiting(Uuid::to_string(&room_join.room_id),&connections.redis_connection).await {
+                                                let mut con = connections.sql_database.begin().await.unwrap();
+                                                let team = get_team_name(room_join.team_selected) ;
+                                                // firstly join as new participant
+                                                let participant_id = join_room(JoinRoom{
+                                                    team_selected: team.clone(),
+                                                    user_id: claims.user_id,
+                                                    room_id: room_join.room_id
+                                                }, &mut con).await ;
+                                                match participant_id {
+                                                    Ok(participant_id) => {
+                                                        // store this new participant in the redis
+                                                            match new_participant(Uuid::to_string(&room_join.room_id), claims.user_id, team.clone(), participant_id, &connections.redis_connection).await {
+                                                                Ok(_) => {
+                                                                    con.commit().await.unwrap();
+                                                                    // store the new connection locally
+                                                                        store_new_connection(Uuid::to_string(&room_join.room_id), participant_id, &mut connections).await ;
+                                                                    // thirdly send the Redis Room data back to him
+                                                                    tx.send(Message::from(
+                                                                        serde_json::to_string::<Room>(&get_Room(Uuid::to_string(&room_join.room_id), &connections.redis_connection).await).unwrap()
+                                                                    )).unwrap();
+                                                                    // finally broadcast the new participant_id, user_id and team_selected to the remaining participants
+                                                                    broadcast_message(Message::from(
+                                                                        serde_json::to_string(&NewJoiner{
+                                                                            participant_id,
+                                                                            user_id: claims.user_id,
+                                                                            team_selected: team,
+                                                                        }).unwrap()
+                                                                    ),Uuid::to_string(&room_join.room_id),&mut connections).await ;
+                                                                },
+                                                                Err(err) => {
+                                                                    con.rollback().await.unwrap();
+                                                                    tracing::error!("Error while adding the participant to the redis : {:?}",err);
+                                                                    tx.send(Message::from(String::from("Error while adding the participant to the redis"))).unwrap()
+                                                                }
+                                                            }
+
+                                                    },
+                                                    Err(err) => {
+                                                        con.rollback().await.unwrap();
+                                                        tracing::error!("Error while joining the room : {:?}",err);
+                                                        tx.send(Message::from(String::from("Error while joining the room"))).unwrap()
+                                                    }
+                                                }
+
+                                            }else {
+                                                tracing::error!("Room is not in waiting state, as room was full");
+                                                tx.send(Message::from(String::from("Room is not in waiting state, as room was full"))).unwrap() ;
+                                            }
+                                        }
+                                    }else{
+                                        tracing::error!("Room doesn't exists");
+                                        tx.send(Message::from(String::from("Invalid Room-Id"))).unwrap() ;
+                                    }
+                                },
+                                None => {
+                                    tracing::error!("Invalid authorization header");
+                                    tx.send(Message::from(String::from("Invalid authorization header"))).unwrap() ;
+                                }
+                            }
+
+
+                        }else if let Ok(bid) = bid {}else{
                             if text == "READY" { // called by room-owner
                                 // it gonna start the auction
                             }else if text == "SOLD" { // in front-end from the last-bid person this will be called
@@ -198,6 +279,11 @@ async fn broadcast_message(msg: Message, room_id: String,state: &mut AppState) {
         }
 
     }
+
+}
+
+
+async fn store_new_connection(room_id: String, participant_id: i32,state: &mut AppState) {
 
 }
 

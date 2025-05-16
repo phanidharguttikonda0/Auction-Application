@@ -49,7 +49,7 @@ pub async fn sign_up(State(state): State<AppState>, Form(sign_up): Form<SignUp>)
     }
     tracing::info!("length of the hashed password was {}", hash_password(sign_up.password.clone()).len()) ;
     let value = sqlx::query_scalar::<_,i32>("insert into users(username,password,mail_id,DOB) values($1,$2,$3,$4) returning id", )
-        .bind(&sign_up.username).bind(&hash_password(sign_up.password)).bind(&sign_up.mail_id).bind(sign_up.DOB)
+        .bind(&sign_up.username).bind(&hash_password(sign_up.password)).bind(&sign_up.mail_id).bind(sign_up.dob)
         .fetch_one(&state.sql_database).await ;
 
     match value {

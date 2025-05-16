@@ -41,9 +41,9 @@ pub enum Team {
 
 #[derive(Debug, Deserialize)]
 pub struct RoomJoin { // the data passed to the websocket in this way
-    authorization_header: String,
-    room_id: Uuid,
-    team_selected: Team
+    pub(crate) authorization_header: String,
+    pub(crate) room_id: Uuid,
+    pub(crate) team_selected: Team
 }
 
 #[derive(Debug)]
@@ -88,6 +88,7 @@ pub struct Room { // will be sent for joining or creating a room
 pub struct NewJoiner { // will be sent to the rest of room member when a new player joins
     pub team_selected: String,
     pub participant_id: i32,
+    pub user_id: i32
 }
 
 #[derive(sqlx::FromRow, Debug, Serialize)]
