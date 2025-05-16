@@ -2,6 +2,7 @@ use axum::extract::ws::Message;
 use serde::{Deserialize, Serialize};
 use tokio::sync::mpsc::UnboundedSender;
 use uuid::Uuid;
+use std::collections::HashSet;
 
 #[derive(Debug, Deserialize)]
 pub struct RoomCreation { // the data passed to the websocket in the following way
@@ -11,20 +12,20 @@ pub struct RoomCreation { // the data passed to the websocket in the following w
     pub room_type: RoomType
 }
 
-#[derive(Debug, Deserialize,Serialize)]
+#[derive(Debug, Deserialize,Serialize, Clone)]
 pub enum RoomStatus {
     WAITING,
     ONGOING,
     FINISHED,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize,Clone)]
 pub enum RoomType {
     PRIVATE,
     PUBLIC,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize,Clone)]
 pub enum Team {
     MUMBAIINDIANS,
     CHENNAISUPERKINGS,
@@ -54,7 +55,6 @@ pub struct JoinRoom { // the data passed to the joinRoom handler in this way
 
 #[derive(Debug)]
 pub struct CreateRoom { // the data passed to the create_room handler in this way
-    pub room_id: Uuid,
     pub accessibility: String,
     pub max_players: u8,
     pub team_selected: String,
@@ -75,7 +75,7 @@ pub struct PlayerUnsold {
     pub room_id: Uuid
 }
 
-#[derive(Debug,Serialize)]
+#[derive(Debug,Serialize, Clone)]
 pub struct Room { // will be sent for joining or creating a room
     pub room_id: Uuid,
     pub room_type: RoomType,
@@ -113,9 +113,9 @@ pub struct IntrestedPlayer {
     pub participant_id: i32,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct CurrentBid {
-    pub team_selected: String,
+    pub participant_id: i32,
     pub amount: i32
 }
 #[derive(Debug, Serialize)]
@@ -127,8 +127,9 @@ pub struct RedisRoom { // redis storing room-data
     pub participants: Vec<(i32,i32,String)>, // (user_id, participant_id, team_name)
     pub purse_remaining: Vec<(i32,i32)>, //(participant_id, amount)
     pub players_bought: Vec<(i32,i32,i32)>, //(participant_id, players_brought, foriegn_players
-    pub room_status: RoomStatus
-}
+    pub room_status: RoomStatus,
+    pub intrested_players: HashSet<i32>, // player-id will be stored (no duplicates will be stored)
+} // while sending intrested-players , it will check whether the player was sold or not
 
 /*
 room_id : RedisRoom

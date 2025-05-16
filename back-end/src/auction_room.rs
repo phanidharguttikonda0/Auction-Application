@@ -7,8 +7,12 @@ use axum::response::IntoResponse;
 use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
+use crate::handlers::redis_handlers::redis_room_creation;
+use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room};
+use crate::middlewares::authentication::authorization_decode;
+use crate::models::rooms::{CreateRoom, CurrentBid, JoinRoom, Room, RoomCreation, RoomJoin, RoomStatus};
 
-pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>,Path((room_id, participant_id)):Path<(String,i32)>) -> impl IntoResponse{
+pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, participant_id)):Path<(String, i32)>) -> impl IntoResponse{
     ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,participant_id))
 } // while establishing connection for initial request we need to send these room-id and participant-id
 
@@ -65,12 +69,88 @@ async fn handle_ws(mut socket: WebSocket,connections:AppState, room_id:String,pa
                 match msg {
                     Message::Text(text) => {
                         tracing::info!("Text message received : {:?}", text) ;
-                        
-                        
-                        
-                        
-                        
-                        
+
+                        let room_creation = serde_json::from_str::<RoomCreation>(&text) ;
+                        let room_join = serde_json::from_str::<RoomJoin>(&text) ;
+                        let bid = serde_json::from_str::<CurrentBid>(&text) ;
+
+                        if let Ok(room_creation) = room_creation {
+                            let claims = authorization_decode(room_creation.authorization_header) ;
+
+                            match claims {
+                                Some(claims) => {
+                                    tracing::info!("we got the claims : {:?}",claims);
+                                    let team_name = get_team_name(room_creation.team.clone()) ;
+                                    let mut con = connections.sql_database.begin().await.unwrap();
+                                    let room_id  = create_room(CreateRoom{
+                                        max_players: room_creation.max_players,
+                                        user_id: claims.user_id,
+                                        team_selected: team_name.clone(),
+                                        accessibility: get_room_type(room_creation.room_type.clone())
+                                    }, &mut con).await;
+
+                                    match room_id {
+                                        Ok(room_id) => {
+                                            let participant_id = join_room(JoinRoom{
+                                                team_selected: team_name.clone(),
+                                                user_id: claims.user_id,
+                                                room_id
+                                            }, &mut con).await ;
+                                            match participant_id {
+                                                Ok(participant_id) => {
+                                                    con.commit().await.unwrap();
+                                                    let mut players_teams = Vec::new() ;
+                                                    players_teams.push((participant_id,team_name.clone())) ;
+
+                                                    let room = Room {
+                                                        room_id: room_id,
+                                                        room_type: room_creation.room_type,
+                                                        max_players: room_creation.max_players,
+                                                        players_teams,
+                                                        status: RoomStatus::WAITING,
+                                                    } ;
+                                                    // know we need to call the redis function to store it in redis
+                                                    redis_room_creation(room.clone(), &connections.redis_connection).await ;
+                                                    // sending the response
+                                                    tx.send(Message::from(
+                                                        serde_json::to_string::<Room>(&room).unwrap()
+                                                    )).unwrap() ;
+                                                },
+                                                Err(err) => {
+                                                    con.rollback().await.unwrap();
+                                                    tracing::error!("Error while joining the room : {:?}",err);
+                                                    tx.send(Message::from(String::from("Error while joining the room"))).unwrap()
+                                                }
+                                            }
+                                        },
+                                        Err(err) => {
+                                            tracing::error!("Error while creating the room : {:?}",err);
+                                            tx.send(Message::from(String::from("Error while creating the room"))).unwrap()
+                                        }
+                                    }
+
+                                },
+                                None => {
+                                    tracing::error!("Invalid authorization header");
+                                    tx.send(Message::from(String::from("Invalid authorization header"))).unwrap()
+                                }
+                            }
+
+                        }else if let Ok(room_join) = room_join {}else if let Ok(bid) = bid {}else{
+                            if text == "READY" { // called by room-owner
+                                // it gonna start the auction
+                            }else if text == "SOLD" { // in front-end from the last-bid person this will be called
+                                // it gonna sold the player to last bid and returns next player by checking if intrested_players was set to true
+                            }else if text == "SET-INTRESTED-PLAYERS" {
+                                // IT GONNA SET next player to intrested
+                            }else{
+                                //
+                            }
+                        }
+
+
+
+
                     },
                     Message::Binary(bin) => {
                         tracing::info!("Binary message received : {:?}",bin);
@@ -108,17 +188,17 @@ async fn broadcast_message(msg: Message, room_id: String,state: &mut AppState) {
 
     let mut read_sockets = state.websocket_connections.read().unwrap() ;
     let participants_list = read_sockets.get(&room_id).unwrap() ;
-    
+
     for participant in participants_list {
-        
+
         if let Err(err) = participant.connection.send(msg.clone()) {
             tracing::error!("Error while sending message to the client : {:?}",err);
         }else{
-            tracing::info!("Message was sent to the client successfully");   
+            tracing::info!("Message was sent to the client successfully");
         }
-        
+
     }
-     
+
 }
 
 /*

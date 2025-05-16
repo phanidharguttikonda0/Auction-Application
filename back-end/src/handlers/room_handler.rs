@@ -7,12 +7,12 @@ use crate::AppState;
 use crate::middlewares::authentication::authorization_decode;
 use crate::models::rooms::{CreateRoom, IntrestedPlayer, JoinRoom, PlayerSold, PlayerUnsold, PoolPlayer, Room, RoomCreation, RoomJoin, RoomType, Team, TeamPlayer};
 
-pub async fn room_creation(room: CreateRoom,connections: &AppState) -> Result<Uuid,String> {
+pub async fn create_room(room: CreateRoom,connection: &mut Transaction<'_, Postgres>) -> Result<Uuid,String> {
 
 
-    let room_id = sqlx::query_scalar::<_,Uuid>("insert into rooms (max_participants,room_status,accessibility,owner_id,) values ($1,$2,$3,$4) returning id)")
+    let room_id = sqlx::query_scalar::<_,Uuid>("insert into rooms (max_participants,room_status,accessibility,owner_id) values ($1,$2,$3,$4) returning id)")
         .bind(room.max_players as i32).bind("WAITING").bind(room.accessibility).bind(room.user_id)
-        .fetch_one(&connections.sql_database).await ;
+        .fetch_one(&mut **connection).await ;
 
     match room_id {
         Ok(room_id) => {
@@ -27,7 +27,7 @@ pub async fn room_creation(room: CreateRoom,connections: &AppState) -> Result<Uu
 
 }
 
-fn get_team_name(team:Team) -> String {
+pub fn get_team_name(team:Team) -> String {
     match team {
         Team::MUMBAIINDIANS => String::from("MUMBAIINDIANS"),
         Team::CHENNAISUPERKINGS => String::from("CHENNAISUPERKINGS"),
@@ -42,18 +42,18 @@ fn get_team_name(team:Team) -> String {
     }
 }
 
-fn get_room_type(room: RoomType) -> String {
+pub fn get_room_type(room: RoomType) -> String {
     match room {
         RoomType::PUBLIC => String::from("PUBLIC"),
         RoomType::PRIVATE => String::from("PRIVATE"),
     }
 }
 
-pub async fn room_join(room_join: JoinRoom, connections: &AppState) -> Result<i32,String> { // participant_id
+pub async fn join_room(room_join: JoinRoom, connection: &mut Transaction<'_, Postgres>) -> Result<i32,String> { // participant_id
 
     let value = sqlx::query_scalar::<_,i32>("insert into participants (room_id, participant_id,team_selected) values ($1,$2,$3) returning id")
         .bind(room_join.room_id).bind(room_join.user_id).bind(room_join.team_selected)
-        .fetch_one(&connections.sql_database).await ;
+        .fetch_one(&mut **connection).await ;
     match value {
         Ok(participant_id) => {
             tracing::info!("successfully joined the room") ;
