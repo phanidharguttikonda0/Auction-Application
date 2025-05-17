@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use tokio::sync::mpsc::UnboundedSender;
 use uuid::Uuid;
 use std::collections::HashSet;
+use crate::models::players::Player;
 
 #[derive(Debug, Deserialize)]
 pub struct RoomCreation { // the data passed to the websocket in the following way
@@ -127,6 +128,7 @@ pub struct RedisRoom { // redis storing room-data
     pub current_player: Option<i32>, // player-id
     pub go_with_intrested: bool,
     pub max_participants: u8,
+    pub owner_id: i32, // user-id of the owner
     pub participants: Vec<(i32,i32,String)>, // (user_id, participant_id, team_name)
     pub purse_remaining: Vec<(i32,i32)>, //(participant_id, amount)
     pub players_bought: Vec<(i32,i32,i32)>, //(participant_id, players_brought, foriegn_players
@@ -140,7 +142,7 @@ room_id : RedisRoom
 
 #[derive(Debug)]
 pub struct ParticipantsConnections {
-    pub participant_id: i32,
+    pub user_id: i32,
     pub connection: UnboundedSender<Message>
 }
 
@@ -154,4 +156,9 @@ pub struct BidReturn {
 pub struct IntrestedPlayers {
     pub room_id: String,
     pub players: Vec<i32>
+}
+
+#[derive(Debug, Serialize)]
+pub struct Players {
+    pub players: Vec<Player>
 }

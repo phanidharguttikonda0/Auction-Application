@@ -12,13 +12,13 @@ use crate::handlers::redis_handlers::{add_intrested_players, check_for_ready, ge
 use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room};
 use crate::middlewares::authentication::authorization_decode;
 use crate::models::players::Player;
-use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
+use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, Players, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
 
-pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, participant_id)):Path<(String, i32)>) -> impl IntoResponse{
-    ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,participant_id))
+pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, user_id)):Path<(String, i32)>) -> impl IntoResponse{
+    ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,user_id))
 } // while establishing connection for initial request we need to send these room-id and participant-id
 
-async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:String, participant_id:i32) {
+async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:String, user_id:i32) {
     tracing::info!("New connection was created");
     let (tx, mut rx) = unbounded_channel::<Message>();
     let second_connection = connections.clone();
@@ -43,7 +43,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                         let participants_list = participants_list.unwrap();
                         let mut index:usize = 0 ;
                         for participant in participants_list {
-                            if participant.participant_id == participant_id {
+                            if participant.user_id == user_id {
                                 let mut write_socket = second_connection.websocket_connections.write().unwrap() ;
                                 let mut participants_list = write_socket.get_mut(&room_id_).unwrap() ;
                                 participants_list.remove(index) ;
@@ -247,8 +247,8 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                     broadcast_message(Message::from(team),intrested_players.room_id,&mut connections).await ;
                                 },
                                 Err(err) => {
-                                    tracing::error!("Error while adding the intrested players to the redis : {:?}",err);
-                                    tx.send(Message::from(String::from("Error while adding the intrested players to the redis"))).unwrap() ;
+                                    tracing::error!("Error while adding the interested players to the redis : {:?}",err);
+                                    tx.send(Message::from(String::from("Error while adding the interested players to the redis"))).unwrap() ;
                                 }
                             }
                         }else{
@@ -264,13 +264,44 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                 }
                             }else if text == "SOLD" { // in front-end from the last-bid person this will be called
                                 // we are gonna return the next player in the list
+                                // who ever has made a bid, in front-end timer will start with in that time , if any other bid was not hitted, then that last bid participants will be called this sold automatically
+
+                                // first-step call the sold function in rooms handler
+
+
+                                // second step is to called the redis function to update the player-sold
+
+                                // broadcast the message to the remaining participants that this particular team brought that player
+
+                                // third step is get the next player
+
+                                // fourth step is store the next player in the redis
+
+
+                                // fifth step is to broadcast the new player to the remaining participants
+
+
                             }else if text == "WANT-TO-SET-INTRESTED-PLAYERS"{ // CALLED BY ONLY OWNER OF THE ROOM
                                 // FIRSTLY NEED TO CALLED BY OWNER OR NOT AND THEN ALL TEAMS BROUGHT 16 PLAYERS MINIMUM
                              // FIRST WE NEED TO SEND THIS, IT WILL RETURN THE LIST OF PLAYERS WHICH ARE UNSOLD AND NOT CAME YET
                              // NOW USER'S NEED TO SELECT FROM THIS LIST AND THEN ALL THE TEAMS WILL SELECT THE PLAYERS AND THEN
                              // CLICK CONTINUE AND IN FRONT-END ITSELF DUPLICATES NEED TO BE REMOVED AND THEN SEND TO BACK-END
+                                if check_for_intrested_players(room_id.clone(), user_id, &mut connections).await {
+                                    tracing::info!("good to go with the intrested_players") ;
+                                    broadcast_message(
+                                        Message::from(
+                                        serde_json::to_string(
+                                            &Players{players: send_players(room_id.clone(), &mut connections).await}
+                                        ).unwrap()
+                                        ), room_id.clone() ,&mut connections
+                                    ).await ;
+                                }else{
+                                    tracing::error!("Not all the players joined the room or it's not the owner who is trying to start the room");
+                                    tx.send(Message::from(String::from("Not all the players joined the room or it's not the owner who is trying to start the room"))).unwrap() ;
+                                }
                             }else{
-                                //
+                                tracing::warn!("Nothing do with the following request");
+                                tx.send(Message::from(String::from("Nothing do with the following request"))).expect("TODO: panic message");
                             }
                         }
 
@@ -280,12 +311,15 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                     },
                     Message::Binary(bin) => {
                         tracing::info!("Binary message received : {:?}",bin);
+                        tx.send(Message::from(String::from("you have sent the binary message"))).unwrap();
                     },
                     Message::Ping(bin) => {
                         tracing::info!("Ping Message received : {:?}",bin) ;
+                        tx.send(Message::from(String::from("you have sent the ping message"))).unwrap();
                     },
                     Message::Pong(bin) => {
                         tracing::info!("Pong Message received : {:?}",bin) ;
+                        tx.send(Message::from(String::from("you have sent the pong message"))).unwrap();
                     },
                     Message::Close(reason) => { // here client closes the connection,
                         // but no need to close because when another notification we are sending to all
@@ -334,6 +368,16 @@ async fn store_new_connection(room_id: String, participant_id: i32,state: &mut A
 
 async fn bid_allowance(room_id: String, participant_id: i32, bid_amount: i32,state: &mut AppState) -> bool {
     true
+}
+
+
+async fn check_for_intrested_players(room_id: String,user_id: i32,state: &mut AppState) -> bool {
+    true // it will check whether he is the owner or not and then whether all teams brought 16 players or not
+}
+
+
+async fn send_players(room_id: String, state: &mut AppState) -> Vec<Player> {
+    Vec::new() // returns the list of players whom are not sold yet or got unsold
 }
 
 
