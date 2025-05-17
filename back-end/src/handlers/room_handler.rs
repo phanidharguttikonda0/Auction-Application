@@ -5,7 +5,7 @@ use sqlx::{Error, Postgres, Transaction};
 use uuid::Uuid;
 use crate::AppState;
 use crate::middlewares::authentication::authorization_decode;
-use crate::models::rooms::{CreateRoom, IntrestedPlayer, JoinRoom, PlayerSold, PlayerUnsold, PoolPlayer, Room, RoomCreation, RoomJoin, RoomType, Team, TeamPlayer};
+use crate::models::rooms::{CreateRoom, JoinRoom, PlayerSold, PlayerUnsold, PoolPlayer, Room, RoomCreation, RoomJoin, RoomStatus, RoomType, Team, TeamPlayer};
 
 pub async fn create_room(room: CreateRoom,connection: &mut Transaction<'_, Postgres>) -> Result<Uuid,String> {
 
@@ -237,10 +237,10 @@ pub async fn player_unsold(player: PlayerUnsold, connections: &AppState) -> bool
 
 }
 
-pub async fn add_to_intrested_players(State(state): State<AppState>, Form(player): Form<IntrestedPlayer>) -> Json<bool> {
 
-    // here we are adding it to the redis not the psql, once auction completed no need of intrested players list
 
-    Json(true)
+pub async fn change_room_status(State(state): State<AppState>, Path(room_id): Path<String>, room_status: RoomStatus) -> bool {
+
+    true
 
 }

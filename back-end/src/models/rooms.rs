@@ -107,18 +107,20 @@ pub struct PoolPlayer{
     pub base_price: i32,
 }
 
-#[derive(sqlx::FromRow, Debug, Serialize, Deserialize)]
-pub struct IntrestedPlayer {
-    pub room_id: Uuid,
-    pub player_id: i32,
-    pub participant_id: i32,
-}
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct CurrentBid {
     pub participant_id: i32,
     pub amount: i32
 }
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Bid {
+    pub participant_id: i32,
+    pub amount: i32,
+    pub room_id: String
+}
+
 #[derive(Debug, Serialize)]
 pub struct RedisRoom { // redis storing room-data
     pub current_bid:CurrentBid,
@@ -140,4 +142,16 @@ room_id : RedisRoom
 pub struct ParticipantsConnections {
     pub participant_id: i32,
     pub connection: UnboundedSender<Message>
+}
+
+#[derive(Debug, Serialize)]
+pub struct BidReturn {
+    pub team: String,
+    pub amount: i32
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct IntrestedPlayers {
+    pub room_id: String,
+    pub players: Vec<i32>
 }

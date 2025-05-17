@@ -6,21 +6,28 @@ use crate::models::players::{Player, Stats};
 
 pub async fn get_player(State(state): State<AppState>, Path(player_id): Path<i32>) -> Json<Result<Player,String>> {
 
+    Json(player(&state, player_id).await)
+
+}
+
+
+
+pub async fn player(state: &AppState, player_id: i32) -> Result<Player,String> {
     let player = sqlx::query_as::<_,Player>("select * from players where id=($1)")
         .bind(player_id).fetch_one(&state.sql_database).await ;
 
     match player {
         Ok(player) => {
             tracing::info!("got the player for the give player_id {}", player_id) ;
-            Json(Ok(player))
+            (Ok(player))
         },
         Err(err) => {
             tracing::error!("error was {}", err) ;
-            Json(Err(String::from("Invalid player-id")))
+            (Err(String::from("Invalid player-id")))
         }
     }
-
 }
+
 
 pub async fn get_stats(State(state): State<AppState>, Path(stats_id): Path<i32>) -> Json<Result<Stats,String>> {
     

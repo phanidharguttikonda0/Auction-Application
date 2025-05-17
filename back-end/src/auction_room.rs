@@ -7,10 +7,12 @@ use axum::response::IntoResponse;
 use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
-use crate::handlers::redis_handlers::{get_Room, is_in_waiting, new_participant, participant_exists, redis_room_creation, room_exists};
+use crate::handlers::players::player;
+use crate::handlers::redis_handlers::{add_intrested_players, check_for_ready, get_Room, is_in_waiting, new_bid, new_participant, participant_exists, redis_room_creation, room_exists};
 use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room};
 use crate::middlewares::authentication::authorization_decode;
-use crate::models::rooms::{CreateRoom, CurrentBid, JoinRoom, NewJoiner, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
+use crate::models::players::Player;
+use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
 
 pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, participant_id)):Path<(String, i32)>) -> impl IntoResponse{
     ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,participant_id))
@@ -22,6 +24,8 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
     let second_connection = connections.clone();
 
     let (mut sender, mut reciever) = socket.split();
+    let room_id_ = room_id.clone();
+
     tokio::spawn(async move {
         while let Some(msg) = rx.recv().await {
             if tokio::time::timeout(Duration::from_secs(12), sender.send(msg)).await.is_err() { // if the message was not reached to the client with in 12 seconds then user connection will be removed , so user needs to re-join again
@@ -35,13 +39,13 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
 
                 match read_sockets {
                     Ok(read_sockets) => {
-                        let participants_list = read_sockets.get(&room_id) ;
+                        let participants_list = read_sockets.get(&room_id_) ;
                         let participants_list = participants_list.unwrap();
                         let mut index:usize = 0 ;
                         for participant in participants_list {
                             if participant.participant_id == participant_id {
                                 let mut write_socket = second_connection.websocket_connections.write().unwrap() ;
-                                let mut participants_list = write_socket.get_mut(&room_id).unwrap() ;
+                                let mut participants_list = write_socket.get_mut(&room_id_).unwrap() ;
                                 participants_list.remove(index) ;
                                 drop(write_socket);
                                 break;
@@ -69,10 +73,10 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                 match msg {
                     Message::Text(text) => {
                         tracing::info!("Text message received : {:?}", text) ;
-
                         let room_creation = serde_json::from_str::<RoomCreation>(&text) ;
                         let room_join = serde_json::from_str::<RoomJoin>(&text) ;
-                        let bid = serde_json::from_str::<CurrentBid>(&text) ;
+                        let bid = serde_json::from_str::<Bid>(&text) ;
+                        let intrested_players_list = serde_json::from_str::<IntrestedPlayers>(&text) ;
 
                         if let Ok(room_creation) = room_creation {
                             let claims = authorization_decode(room_creation.authorization_header) ;
@@ -217,13 +221,54 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                             }
 
 
-                        }else if let Ok(bid) = bid {}else{
-                            if text == "READY" { // called by room-owner
-                                // it gonna start the auction
+                        }else if let Ok(bid) = bid {
+                            // firstly check whether the bid is valid or not
+                            if bid_allowance(bid.room_id.clone(),bid.participant_id,bid.amount,&mut connections).await {
+                                match new_bid(bid.room_id.clone(),bid.participant_id,bid.amount,&connections.redis_connection).await {
+                                    Ok(team) => {
+                                        tracing::info!("Bid was added successfully");
+                                        broadcast_message(Message::from(
+                                            serde_json::to_string(&BidReturn { team, amount: bid.amount}).unwrap()
+                                        ),bid.room_id,&mut connections).await ;
+                                    },
+                                    Err(err) => {
+                                        tracing::error!("Error while adding the bid to the redis : {:?}",err);
+                                        tx.send(Message::from(String::from("Error while adding the bid to the redis"))).unwrap() ;
+                                    }
+                                }
+                            }else{
+                                tracing::warn!("Bid is not allowed due to less purse to buy the threshold players or foreign players limit") ;
+                                tx.send(Message::from(String::from("Bid is not allowed due to less purse to buy the threshold players or foreign players limit"))).unwrap() ;
+                            }
+                        }else if let Ok(intrested_players) = intrested_players_list{
+                            // each participant will send the list to here
+                            match add_intrested_players(intrested_players.players, intrested_players.room_id.clone(), &connections.redis_connection).await {
+                                Ok(team) => {
+                                    broadcast_message(Message::from(team),intrested_players.room_id,&mut connections).await ;
+                                },
+                                Err(err) => {
+                                    tracing::error!("Error while adding the intrested players to the redis : {:?}",err);
+                                    tx.send(Message::from(String::from("Error while adding the intrested players to the redis"))).unwrap() ;
+                                }
+                            }
+                        }else{
+                            if text == "READY" { // called by room-owner only
+
+                                // firstly let's check whether all the max-players joined or not
+                                if check_for_ready(room_id.clone() ,&connections.redis_connection).await {
+                                    let player = player(&connections, 1).await.unwrap() ;
+                                    broadcast_message(Message::from(serde_json::to_string(&player).unwrap()),room_id.clone(),&mut connections).await ;
+                                }else{
+                                    tracing::error!("Not all the players joined the room or it's not the owner who is trying to start the room");
+                                    tx.send(Message::from(String::from("Not all the players joined the room or it's not the owner who is trying to start the room"))).unwrap() ;
+                                }
                             }else if text == "SOLD" { // in front-end from the last-bid person this will be called
-                                // it gonna sold the player to last bid and returns next player by checking if intrested_players was set to true
-                            }else if text == "SET-INTRESTED-PLAYERS" {
-                                // IT GONNA SET next player to intrested
+                                // we are gonna return the next player in the list
+                            }else if text == "WANT-TO-SET-INTRESTED-PLAYERS"{ // CALLED BY ONLY OWNER OF THE ROOM
+                                // FIRSTLY NEED TO CALLED BY OWNER OR NOT AND THEN ALL TEAMS BROUGHT 16 PLAYERS MINIMUM
+                             // FIRST WE NEED TO SEND THIS, IT WILL RETURN THE LIST OF PLAYERS WHICH ARE UNSOLD AND NOT CAME YET
+                             // NOW USER'S NEED TO SELECT FROM THIS LIST AND THEN ALL THE TEAMS WILL SELECT THE PLAYERS AND THEN
+                             // CLICK CONTINUE AND IN FRONT-END ITSELF DUPLICATES NEED TO BE REMOVED AND THEN SEND TO BACK-END
                             }else{
                                 //
                             }
@@ -286,6 +331,12 @@ async fn broadcast_message(msg: Message, room_id: String,state: &mut AppState) {
 async fn store_new_connection(room_id: String, participant_id: i32,state: &mut AppState) {
 
 }
+
+async fn bid_allowance(room_id: String, participant_id: i32, bid_amount: i32,state: &mut AppState) -> bool {
+    true
+}
+
+
 
 /*
 websocket need to take care of :
