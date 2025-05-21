@@ -8,11 +8,12 @@ use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
 use crate::handlers::players::player;
-use crate::handlers::redis_handlers::{add_intrested_players, check_for_ready, get_Room, is_in_waiting, new_bid, new_participant, participant_exists, redis_room_creation, room_exists};
-use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room};
+use crate::handlers::redis_handlers::{add_intrested_players, next_player,check_for_ready, get_Room, is_in_waiting, new_bid,sell_player, new_participant, participant_exists, redis_room_creation, room_exists};
+use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room, player_sold};
 use crate::middlewares::authentication::authorization_decode;
 use crate::models::players::Player;
-use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, Players, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
+use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, PlayerSold, Players, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
+
 
 pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, user_id)):Path<(String, i32)>) -> impl IntoResponse{
     ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,user_id))
@@ -263,23 +264,28 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                     tx.send(Message::from(String::from("Not all the players joined the room or it's not the owner who is trying to start the room"))).unwrap() ;
                                 }
                             }else if text == "SOLD" { // in front-end from the last-bid person this will be called
-                                // we are gonna return the next player in the list
-                                // who ever has made a bid, in front-end timer will start with in that time , if any other bid was not hitted, then that last bid participants will be called this sold automatically
+                               //* when a player has done bid then a timer will be started in his front-end and if any other bids were came that timer will be stopped
+                                
+                                // first step is to called the redis function to update the player-sold and return the player_id
+                                let selling_player = sell_player(room_id.clone(), &connections.redis_connection).await ;
+                                
+                                
+                                // second-step call the sold function in rooms handler to update in sqlx
+                                let value = player_sold(selling_player.clone(), &mut connections).await ;
 
-                                // first-step call the sold function in rooms handler
 
-
-                                // second step is to called the redis function to update the player-sold
 
                                 // broadcast the message to the remaining participants that this particular team brought that player
+                                broadcast_message(Message::from(value),room_id.clone(),&mut connections).await ;
 
                                 // third step is get the next player
+                                let player = player(&connections, selling_player.player_id+1).await.unwrap() ;
 
                                 // fourth step is store the next player in the redis
-
+                                next_player(room_id.clone(),player.id, &connections.redis_connection).await ;
 
                                 // fifth step is to broadcast the new player to the remaining participants
-
+                                broadcast_message(Message::from(serde_json::to_string(&player).unwrap()),room_id.clone(),&mut connections).await ;
 
                             }else if text == "WANT-TO-SET-INTRESTED-PLAYERS"{ // CALLED BY ONLY OWNER OF THE ROOM
                                 // FIRSTLY NEED TO CALLED BY OWNER OR NOT AND THEN ALL TEAMS BROUGHT 16 PLAYERS MINIMUM
@@ -287,7 +293,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                              // NOW USER'S NEED TO SELECT FROM THIS LIST AND THEN ALL THE TEAMS WILL SELECT THE PLAYERS AND THEN
                              // CLICK CONTINUE AND IN FRONT-END ITSELF DUPLICATES NEED TO BE REMOVED AND THEN SEND TO BACK-END
                                 if check_for_intrested_players(room_id.clone(), user_id, &mut connections).await {
-                                    tracing::info!("good to go with the intrested_players") ;
+                                    tracing::info!("good to go with the interested_players") ;
                                     broadcast_message(
                                         Message::from(
                                         serde_json::to_string(

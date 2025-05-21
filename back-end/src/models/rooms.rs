@@ -62,7 +62,7 @@ pub struct CreateRoom { // the data passed to the create_room handler in this wa
     pub user_id: i32,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize,Clone)]
 pub struct PlayerSold {
     pub player_id: i32,
     pub participant_id: i32,
