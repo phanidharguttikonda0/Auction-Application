@@ -115,7 +115,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                                         status: RoomStatus::WAITING,
                                                     } ;
                                                     // know we need to call the redis function to store it in redis
-                                                    redis_room_creation(room.clone(), &connections.redis_connection).await ;
+                                                    redis_room_creation(room.clone(),claims.user_id,&connections.redis_connection).await ;
                                                     // sending the response
                                                     tx.send(Message::from(
                                                         serde_json::to_string::<Room>(&room).unwrap()

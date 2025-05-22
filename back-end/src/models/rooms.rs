@@ -10,7 +10,7 @@ pub struct RoomCreation { // the data passed to the websocket in the following w
     pub authorization_header: String, // where it contains the username and user-id
     pub max_players: u8,
     pub team: Team,
-    pub room_type: RoomType
+    pub room_type: RoomType,
 }
 
 #[derive(Debug, Deserialize,Serialize, Clone)]
@@ -122,9 +122,9 @@ pub struct Bid {
     pub room_id: String
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct RedisRoom { // redis storing room-data
-    pub current_bid:CurrentBid,
+    pub current_bid:Option<CurrentBid>,
     pub current_player: Option<i32>, // player-id
     pub go_with_intrested: bool,
     pub max_participants: u8,
