@@ -8,7 +8,7 @@ use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
 use crate::handlers::players::player;
-use crate::handlers::redis_handlers::{add_intrested_players, next_player,check_for_ready, get_Room, is_in_waiting, new_bid,sell_player, new_participant, participant_exists, redis_room_creation, room_exists};
+use crate::handlers::redis_handlers::{add_intrested_players, next_player, check_for_ready, get_Room, is_in_waiting, new_bid, sell_player, new_participant, participant_exists, redis_room_creation, room_exists, intrested_players_set, player_from_redis};
 use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room, player_sold};
 use crate::middlewares::authentication::authorization_decode;
 use crate::models::players::Player;
@@ -243,7 +243,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                             }
                         }else if let Ok(intrested_players) = intrested_players_list{
                             // each participant will send the list to here
-                            match add_intrested_players(intrested_players.players, intrested_players.room_id.clone(), &connections.redis_connection).await {
+                            match add_intrested_players(intrested_players.players, intrested_players.room_id.clone(),user_id, &connections.redis_connection).await {
                                 Ok(team) => {
                                     broadcast_message(Message::from(team),intrested_players.room_id,&mut connections).await ;
                                 },
@@ -265,11 +265,11 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                 }
                             }else if text == "SOLD" { // in front-end from the last-bid person this will be called
                                //* when a player has done bid then a timer will be started in his front-end and if any other bids were came that timer will be stopped
-                                
+
                                 // first step is to called the redis function to update the player-sold and return the player_id
-                                let selling_player = sell_player(room_id.clone(), &connections.redis_connection).await ;
-                                
-                                
+                                let selling_player = sell_player(room_id.clone(), &connections.redis_connection).await.unwrap() ;
+
+
                                 // second-step call the sold function in rooms handler to update in sqlx
                                 let value = player_sold(selling_player.clone(), &mut connections).await ;
 
@@ -279,7 +279,12 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                 broadcast_message(Message::from(value),room_id.clone(),&mut connections).await ;
 
                                 // third step is get the next player
-                                let player = player(&connections, selling_player.player_id+1).await.unwrap() ;
+
+                                let player: Player = if intrested_players_set(room_id.clone(), &connections.redis_connection).await {
+                                        player(&connections, player_from_redis(room_id.clone(), &connections.redis_connection).await.unwrap()).await.unwrap()
+                                }else{
+                                    player(&connections, selling_player.player_id+1).await.unwrap()
+                                } ;
 
                                 // fourth step is store the next player in the redis
                                 next_player(room_id.clone(),player.id, &connections.redis_connection).await ;

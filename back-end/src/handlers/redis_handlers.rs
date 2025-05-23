@@ -292,21 +292,167 @@ pub async fn check_for_ready(room_id: String, connection: &Client) -> bool{
     
 }
 
-pub async fn add_intrested_players(intrested_players: Vec<i32>, room_id: String, connection: &Client) -> Result<String, String>{
-    Ok(String::from("Team Name to be returned"))
+pub async fn add_intrested_players(intrested_players: Vec<i32>, room_id: String,user_id: i32, connection: &Client) -> Result<String, String> {
+    match get_room_string(room_id.clone(), connection).await {
+        Ok(mut data) =>{
+
+            let mut redis_room: RedisRoom = match serde_json::from_str(&data.0) {
+                Ok(data) => data,
+                Err(e) => {
+                    return Err(String::from("Error in deserializing room data"))
+                }
+            } ;
+            let mut intrested_players_set = redis_room.intrested_players;
+            for player in intrested_players {
+                intrested_players_set.insert(player);
+            }
+
+            let team_name = redis_room.participants.iter().find(|x| x.0 == user_id).unwrap().2.clone();
+
+            redis_room.intrested_players = intrested_players_set;
+            let serialized = match serde_json::to_string(&redis_room) {
+                Ok(json) => json,
+                Err(e) => {
+                    return Err(String::from("Error in serializing room data"))
+                }
+            } ;
+            let l: RedisResult<()> = data.1.set(&room_id, serialized).await ;
+            match l {
+                Ok(_) => {
+                    Ok(team_name)
+                },
+                Err(e) => {
+                    return Err(String::from("Error in updating room in Redis"))
+                }
+            }
+        },
+        Err(err) => {
+            return Err(String::from("Error in getting room data"))
+        }
+    }
+
 }
 
-pub async fn sell_player(room_id: String, connection: &Client) -> PlayerSold{
+pub async fn sell_player(room_id: String, connection: &Client) -> Result<PlayerSold, String>{
     // it cleans up the last bid and sends the last bid participant_id and amount sold for
-    PlayerSold { // it will be done from the redis
-        player_id: 1,
-        room_id: Uuid::parse_str(&room_id).unwrap(),
-        participant_id: 2,
-        amount: 200
+
+    match get_room_string(room_id.clone(), connection).await {
+        Ok(mut data) => {
+            let mut redis_room: RedisRoom = match serde_json::from_str(&data.0) {
+                Ok(data) => data,
+                Err(e) => {
+                    return Err(String::from("Error in deserializing room data"))
+                }
+            } ;
+            let current_bid = redis_room.current_bid.unwrap();
+            let current_player = redis_room.current_player.unwrap();
+            redis_room.current_bid = None;
+            redis_room.current_player = None;
+            let serialized = match serde_json::to_string(&redis_room) {
+                Ok(json) => json,
+                Err(e) => {
+                    return Err(String::from("Error in serializing room data"))
+                }
+            } ;
+            let l: RedisResult<()> = data.1.set(&room_id, serialized).await ;
+            match l {
+                Ok(_) => {
+                    Ok(PlayerSold {
+                        player_id: current_player,
+                        room_id: Uuid::parse_str(&room_id).unwrap(),
+                        participant_id: current_bid.participant_id,
+                        amount: current_bid.amount
+                    })
+                },
+                Err(err) => {
+                    Err(String::from("Error in getting room data"))
+                }
+            }
+        },
+        Err(err) => {
+            tracing::error!("Failed to get room data for room_id {}: {}", room_id, err);
+            Err(String::from("Error in getting room data"))
+        }
     }
+
 }
 
 pub async fn next_player(room_id: String, player_id: i32,connection: &Client) -> bool {
-    true // returns true if it successfully stores the next player
+    match get_room_string(room_id.clone(), connection).await {
+        Ok(mut data) => {
+            let mut redis_room: RedisRoom = match serde_json::from_str(&data.0) {
+                Ok(data) => data,
+                Err(e) => {
+                    return false ;
+                }
+            } ;
+            redis_room.current_player = Some(player_id);
+            let serialized = match serde_json::to_string(&redis_room) {
+                Ok(data) => data,
+                Err(e) => {
+                    return false ;
+                }
+            } ;
+            let l: RedisResult<()> = data.1.set(&room_id, serialized).await ;
+            match l {
+                Ok(_) => true,
+                Err(e) => {
+                    tracing::error!("Failed to update room in Redis for room_id {}: {}", room_id, e);
+                    false
+                }
+            }
+        },
+        Err(err) => {
+            tracing::error!("Failed to get room data for room_id {}: {}", room_id, err);
+            false 
+        }
+    }
 }
 
+
+pub async fn player_from_redis(room_id: String, connection: &Client) -> Result<i32, String> {
+
+    match get_room_string(room_id.clone(), connection).await {
+        Ok(mut data) => {
+            let room: RedisRoom = match serde_json::from_str(&data.0) {
+                Ok(data) => data,
+                Err(e) => {
+                    return Err(String::from("Error in deserializing room data"))
+                }
+            } ;
+            let mut next_player = room.intrested_players;
+            for player in next_player.iter() {
+                let player_id = player.clone() ;
+                next_player.remove(&player_id);
+                return Ok(player_id) ;
+            }
+            Ok(-1)
+        },
+        Err(err) => {
+            return Err(String::from("Error in getting room data"))
+        }
+    }
+
+}
+
+
+pub async fn intrested_players_set(room_id: String, connection: &Client) -> bool {
+    match get_room_string(room_id.clone(), connection).await {
+        Ok(mut data) => {
+            let mut redis_room: RedisRoom = match serde_json::from_str(&data.0) {
+                Ok(data) => data,
+                Err(e) => {
+                    return false ;
+                }
+            } ;
+            if redis_room.intrested_players.len() == 0 {
+                false
+            }else{
+                true
+            }
+        },
+        Err(err) => {
+            return false ;
+        }
+    }
+}
