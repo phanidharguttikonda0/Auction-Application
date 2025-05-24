@@ -239,8 +239,28 @@ pub async fn player_unsold(player: PlayerUnsold, connections: &AppState) -> bool
 
 
 
-pub async fn change_room_status(State(state): State<AppState>, Path(room_id): Path<String>, room_status: RoomStatus) -> bool {
+pub async fn change_room_status(state: &AppState, room_id: String, room_status: RoomStatus) -> bool {
 
-    true
+    let status = sqlx::query("update rooms set room_status=$1 where id=$2")
+        .bind(match room_status {
+            RoomStatus::WAITING => "WAITING",
+            RoomStatus::ONGOING => "ONGOING",
+            RoomStatus::FINISHED => "FINISHED"
+        }).bind(&room_id).execute(&state.sql_database).await ;
+    match status{ 
+        Ok(status) => {
+            if status.rows_affected() > 0 {
+                tracing::info!("rows effected while changing the room_status") ;
+                true
+            }else{
+                tracing::info!("rows not effected while changing room_status") ;
+                false
+            }
+        },
+        Err(err) => {
+            tracing::error!("error which changing room_status was {}",err) ;
+            false
+        }
+    }
 
 }

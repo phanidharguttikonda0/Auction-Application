@@ -26,3 +26,8 @@ pub struct Stats{
     pub three_wickets: Option<i32>,
     stats_from: Option<String>,
 }
+
+#[derive(Debug, Serialize, sqlx::FromRow)]
+pub struct Country {
+    pub country: String,
+}

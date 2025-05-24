@@ -404,7 +404,7 @@ pub async fn next_player(room_id: String, player_id: i32,connection: &Client) ->
         },
         Err(err) => {
             tracing::error!("Failed to get room data for room_id {}: {}", room_id, err);
-            false 
+            false
         }
     }
 }
@@ -455,4 +455,59 @@ pub async fn intrested_players_set(room_id: String, connection: &Client) -> bool
             return false ;
         }
     }
+}
+
+
+pub async fn get_current_player(room_id: String, connection: &Client) -> Option<i32> {
+    let room = get_room_string(room_id.clone(), connection).await.unwrap() ;
+    let redis_room = serde_json::from_str::<RedisRoom>(&room.0).unwrap() ;
+    if redis_room.current_player.is_none() {
+        None
+    }else{
+        Some(redis_room.current_player.unwrap())
+    }
+}
+
+
+pub async fn bid_allowance_data(room_id: String, participant_id: i32,connection: &Client) -> (i32,i32,i32) {
+    let room = get_room_string(room_id.clone(), connection).await.unwrap() ;
+    let redis_room = serde_json::from_str::<RedisRoom>(&room.0).unwrap() ;
+    let mut details: (i32,i32,i32) = (0,0,0);
+    for x in redis_room.players_bought {
+        if x.0 == participant_id {
+            details.0 = x.1 ; // it tells the players brought and also no of foreign player
+            details.1 = x.2 ;
+        }
+    }
+
+    for x in redis_room.purse_remaining {
+        if x.0 == participant_id {
+            details.2 = x.1 ;
+            break
+        }
+    }
+
+    details
+}
+
+
+pub async fn is_owner(room_id: String, user_id: i32, connection: &Client) -> bool {
+    let room = get_room_string(room_id.clone(), connection).await.unwrap() ;
+    let redis_room = serde_json::from_str::<RedisRoom>(&room.0).unwrap() ;
+    if redis_room.owner_id == user_id {
+        true
+    }else{
+        false
+    }
+}
+
+pub async fn all_teams_16_players(room_id: String, connection: &Client) -> bool {
+    let room = get_room_string(room_id.clone(), connection).await.unwrap() ;
+    let redis_room = serde_json::from_str::<RedisRoom>(&room.0).unwrap() ;
+    for x in redis_room.players_bought {
+        if x.1 < 16 {
+            return false
+        }
+    }
+    true
 }

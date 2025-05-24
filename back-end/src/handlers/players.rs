@@ -2,7 +2,7 @@
 use axum::extract::{State, Path};
 use axum::Json;
 use crate::AppState;
-use crate::models::players::{Player, Stats};
+use crate::models::players::{Country, Player, Stats};
 
 pub async fn get_player(State(state): State<AppState>, Path(player_id): Path<i32>) -> Json<Result<Player,String>> {
 
@@ -45,4 +45,28 @@ pub async fn get_stats(State(state): State<AppState>, Path(stats_id): Path<i32>)
         }
     }
 
+}
+
+
+pub async fn is_foreign_player(mut state: &AppState, player_id: i32) -> Result<bool,String> {
+    
+    let value = sqlx::query_as::<_,Country>("select * from players where id=($1)")
+        .bind(player_id).fetch_one(&state.sql_database).await ;
+    
+    match value {
+        Ok(mut country) => {
+            country.country = country.country.to_uppercase() ;
+            if country.country == "india" {
+                Ok(false)
+            }else{
+                Ok(true)    
+            }
+            
+        },
+        Err(err) => {
+            tracing::error!("the error while fetching player country , error was {}",err) ;
+            Err(String::from("Unable to fetch player"))
+        }
+    }
+    
 }

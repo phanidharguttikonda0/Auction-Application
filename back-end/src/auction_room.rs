@@ -7,12 +7,12 @@ use axum::response::IntoResponse;
 use tokio::sync::mpsc::unbounded_channel;
 use uuid::Uuid;
 use crate::AppState;
-use crate::handlers::players::player;
-use crate::handlers::redis_handlers::{add_intrested_players, next_player, check_for_ready, get_Room, is_in_waiting, new_bid, sell_player, new_participant, participant_exists, redis_room_creation, room_exists, intrested_players_set, player_from_redis};
-use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room, player_sold};
+use crate::handlers::players::{is_foreign_player, player};
+use crate::handlers::redis_handlers::{add_intrested_players, next_player, check_for_ready, get_Room, is_in_waiting, new_bid, sell_player, new_participant, participant_exists, redis_room_creation, room_exists, intrested_players_set, player_from_redis,  get_current_player,  bid_allowance_data, is_owner, all_teams_16_players};
+use crate::handlers::room_handler::{get_room_type, get_team_name, create_room, join_room, player_sold, change_room_status};
 use crate::middlewares::authentication::authorization_decode;
 use crate::models::players::Player;
-use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, PlayerSold, Players, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
+use crate::models::rooms::{Bid, BidReturn, CreateRoom, CurrentBid, IntrestedPlayers, JoinRoom, NewJoiner, ParticipantsConnections, PlayerSold, Players, RedisRoom, Room, RoomCreation, RoomJoin, RoomStatus};
 
 
 pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<AppState>, Path((room_id, user_id)):Path<(String, i32)>) -> impl IntoResponse{
@@ -116,6 +116,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                                     } ;
                                                     // know we need to call the redis function to store it in redis
                                                     redis_room_creation(room.clone(),claims.user_id,&connections.redis_connection).await ;
+
                                                     // sending the response
                                                     tx.send(Message::from(
                                                         serde_json::to_string::<Room>(&room).unwrap()
@@ -153,8 +154,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                     if room_exists(claims.user_id, &connections.redis_connection).await {
                                         let val = participant_exists(claims.user_id,Uuid::to_string(&room_join.room_id), &connections.redis_connection).await ;
                                         if  val.0 {
-                                            // he already exists, so just store the new connection and return the room-details
-                                            store_new_connection(Uuid::to_string(&room_join.room_id),val.1,&mut connections).await ;
+
                                             tx.send(Message::from(
                                                 serde_json::to_string::<Room>(&get_Room(Uuid::to_string(&room_join.room_id), &connections.redis_connection).await).unwrap()
                                             )).unwrap();
@@ -175,8 +175,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                                             match new_participant(Uuid::to_string(&room_join.room_id), claims.user_id, team.clone(), participant_id, &connections.redis_connection).await {
                                                                 Ok(_) => {
                                                                     con.commit().await.unwrap();
-                                                                    // store the new connection locally
-                                                                        store_new_connection(Uuid::to_string(&room_join.room_id), participant_id, &mut connections).await ;
+
                                                                     // thirdly send the Redis Room data back to him
                                                                     tx.send(Message::from(
                                                                         serde_json::to_string::<Room>(&get_Room(Uuid::to_string(&room_join.room_id), &connections.redis_connection).await).unwrap()
@@ -258,7 +257,13 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                 // firstly let's check whether all the max-players joined or not
                                 if check_for_ready(room_id.clone() ,&connections.redis_connection).await {
                                     let player = player(&connections, 1).await.unwrap() ;
-                                    broadcast_message(Message::from(serde_json::to_string(&player).unwrap()),room_id.clone(),&mut connections).await ;
+                                    // need to change the room-status
+                                    let status = change_room_status(&connections,room_id.clone(),RoomStatus::ONGOING).await ;
+                                    if status {
+                                        broadcast_message(Message::from(serde_json::to_string(&player).unwrap()),room_id.clone(),&mut connections).await ;
+                                    }else{
+                                        tx.send(Message::from(String::from("status was not updated"))).unwrap() ;
+                                    }
                                 }else{
                                     tracing::error!("Not all the players joined the room or it's not the owner who is trying to start the room");
                                     tx.send(Message::from(String::from("Not all the players joined the room or it's not the owner who is trying to start the room"))).unwrap() ;
@@ -373,21 +378,73 @@ async fn broadcast_message(msg: Message, room_id: String,state: &mut AppState) {
 }
 
 
-async fn store_new_connection(room_id: String, participant_id: i32,state: &mut AppState) {
-
-}
 
 async fn bid_allowance(room_id: String, participant_id: i32, bid_amount: i32,state: &mut AppState) -> bool {
-    true
+    // min of 18 player need to be buy and max 9 players of foreigneers in that
+    // firstly check whether the player was foreigner or not
+    let player_id = get_current_player(room_id.clone(), &state.redis_connection).await;
+    match player_id {
+        Some(player_id) => {
+            match is_foreign_player(state, player_id).await{
+                Ok(is_foreigener) => {
+                    // let's get bid allowance data
+                    let (total_players_brought, foreign_players, purse_remaining) = bid_allowance_data(room_id.clone(),participant_id, &state.redis_connection).await ;
+
+                    if is_foreigener && foreign_players >= 9 {
+                        false
+                    }else{
+                        if total_players_brought >= 18 && purse_remaining >= bid_amount {
+                            true
+                        }else{
+                            if purse_remaining <= bid_amount {
+                                false
+                            }else {
+                                let players_to_brought = 18 - total_players_brought ;
+                                let amount_needed = players_to_brought * 30 ;
+                                let amount_remaining = purse_remaining - bid_amount ;
+                                if amount_remaining < amount_needed {
+                                    false
+                                }else{
+                                    true
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                },
+                Err(err) => {
+                    false
+                }
+            }
+        },
+        None => {
+            false
+        }
+    }
+
 }
 
 
 async fn check_for_intrested_players(room_id: String,user_id: i32,state: &mut AppState) -> bool {
-    true // it will check whether he is the owner or not and then whether all teams brought 16 players or not
+
+    if is_owner(room_id.clone(),user_id, &state.redis_connection).await {
+        if all_teams_16_players(room_id.clone(), &state.redis_connection).await {
+            true
+        }else{
+            false
+        }
+    }else{
+        false
+    }
+    // it will check whether he is the owner or not and then whether all teams brought 16 players or not
 }
 
 
 async fn send_players(room_id: String, state: &mut AppState) -> Vec<Player> {
+
     Vec::new() // returns the list of players whom are not sold yet or got unsold
 }
 
