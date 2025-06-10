@@ -304,13 +304,25 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                              // CLICK CONTINUE AND IN FRONT-END ITSELF DUPLICATES NEED TO BE REMOVED AND THEN SEND TO BACK-END
                                 if check_for_intrested_players(room_id.clone(), user_id, &mut connections).await {
                                     tracing::info!("good to go with the interested_players") ;
-                                    broadcast_message(
-                                        Message::from(
-                                        serde_json::to_string(
-                                            &Players{players: send_players(room_id.clone(), &mut connections).await}
-                                        ).unwrap()
-                                        ), room_id.clone() ,&mut connections
-                                    ).await ;
+                                    match send_players(room_id.clone(), &mut connections).await {
+                                        Ok(players) => {
+                                            broadcast_message(
+                                                Message::from(
+                                                    serde_json::to_string(
+                                                        &Players{players}
+                                                    ).unwrap()
+                                                ), room_id.clone() ,&mut connections
+                                            ).await ;
+                                        },
+                                        Err(err) => {
+                                            broadcast_message(
+                                                Message::from(
+                                                    err
+                                                ), room_id.clone() ,&mut connections
+                                            ).await ;
+                                        }
+                                    }
+
                                 }else{
                                     tracing::error!("Not all the players joined the room or it's not the owner who is trying to start the room");
                                     tx.send(Message::from(String::from("Not all the players joined the room or it's not the owner who is trying to start the room"))).unwrap() ;
@@ -443,9 +455,25 @@ async fn check_for_intrested_players(room_id: String,user_id: i32,state: &mut Ap
 }
 
 
-async fn send_players(room_id: String, state: &mut AppState) -> Vec<Player> {
+async fn send_players(room_id: String, state: &mut AppState) -> Result<Vec<Player>, String> {
 
-    Vec::new() // returns the list of players whom are not sold yet or got unsold
+    let remaining_players = sqlx::query_as::<_,Player>("SELECT p.*
+        FROM players p
+        LEFT JOIN sold_players sp ON p.id = sp.player_id
+        WHERE sp.player_id IS NULL;
+        ")
+        .bind(room_id).fetch_all(&state.sql_database).await ;
+    tracing::info!("Getting the Reamining Players") ;
+    match remaining_players {
+        Ok(players) => {
+            tracing::info!("we got the players list") ;
+            Ok(players)
+        },
+        Err(err) => {
+            tracing::error!("unable to get the players list") ;
+            Err(String::from("we are unable to get the players list"))
+        }
+    }
 }
 
 
