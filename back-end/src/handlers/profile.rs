@@ -1,13 +1,27 @@
 
 use axum::extract::{State,Path, Request};
 use axum::{Extension, Form, Json};
+use axum::http::Extensions;
+use crate::AppState;
 use crate::middlewares::authentication::hash_password;
 use crate::models::authentication::Claims;
-use crate::models::profile::{Password, Profile};
+use crate::models::profile::{Auction, Password, Profile, SimpleProfile};
 
-pub async fn profile(State(state): State<crate::AppState>,req: Request) -> Json<Profile> {
+pub async fn profile(State(state): State<crate::AppState>, Extension(claims):Extension<Claims>) -> Json<Result<Profile, String>> {
     // from authorization header we will get the username and user-id
-    Json(get_user_profile("".to_string(), 0).await)
+    match get_user_profile(claims.username.clone(), claims.user_id, &state).await {
+        Ok(user) =>
+            {
+                tracing::info!("got the user for {}", &claims.username);
+                Json(Ok(user))
+            },
+        Err(err) => {
+            tracing::error!("error was {}",err) ;
+            Json(
+                Err(String::from("Error getting user profile"))
+            )
+        }
+    }
 }
 
 pub async fn search(State(state): State<crate::AppState>, Path(username): Path<String>) -> Json<Result<Vec<(String, i32)>, String>> {
@@ -50,11 +64,70 @@ pub async fn reset_password(State(state): State<crate::AppState>, Extension(clai
 
 }
 
-pub async fn get_profile(State(state): State<crate::AppState>, Path(username): Path<String>) -> Json<Profile> {
-    Json(get_user_profile("".to_string(), 0).await)
+pub async fn get_profile(State(state): State<crate::AppState>, Path((username,user_id)): Path<(String,i32)>) -> Json<Result<Profile, String>> {
+
+    match get_user_profile(username.clone(), user_id, &state).await {
+        Ok(user) =>
+            {
+                tracing::info!("got the user for {}", &username);
+                Json(Ok(user))
+            },
+        Err(err) => {
+            tracing::error!("error was {}",err) ;
+            Json(
+                Err(String::from("Error getting user profile"))
+            )
+        }
+    }
+
 }
 
 
-async fn get_user_profile(username: String, user_id: i32) -> Profile {
-    Profile{ auctions: vec![], mail_id: String::from(""), username: String::from("") }
+async fn get_user_profile(username: String, user_id: i32, state: &AppState) -> Result<Profile,String> {
+
+    // we need to get the mail-id username
+
+let simple_profile = sqlx::query_as::<_,SimpleProfile>("select mail_id from users where user_id=$1")
+.bind(user_id).fetch_one(&state.sql_database).await ;
+
+    match simple_profile {
+        Ok(simple_profile) => {
+            let auctions = sqlx::query_as::<_, Auction>(
+                r#"
+    SELECT
+        r.id AS room_id,
+        p.team_selected,
+        p.participant_id,
+        r.createdAt,
+        r.accessibility,
+        r.room_status
+    FROM participants p
+    JOIN rooms r ON r.id = p.room_id
+    WHERE p.participant_id = $1
+    "#
+            )
+                .bind(user_id)
+                .fetch_all(&state.sql_database)
+                .await;
+
+
+            match auctions {
+                    Ok(auctions) => {
+                        tracing::info!("Got the profile") ;
+                        Ok(Profile{ username, mail_id: simple_profile.mail_id, auctions})
+                    },
+                    Err(err) => {
+                        tracing::error!("go the error while getting the profile") ;
+                        Err(String::from("Invalid user-id or server problem"))
+                    }
+                }
+        },
+        Err(err) => {
+            tracing::error!("cannot able to find mail-id");
+            Err(String::from("Cannot able to Find Mail-id"))
+        }
+    }
+
+
+
 }

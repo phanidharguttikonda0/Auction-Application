@@ -63,7 +63,7 @@ fn profile_routes() -> Router<AppState> {
     Router::new().route("/", get(profile).layer(middleware::from_fn(authorization_check)))
         .route("/search/{username}", get(search))
         .route("/reset-password", post(reset_password).layer(middleware::from_fn(authorization_check)))
-        .route("/get-user/{username}", get(get_profile)) // returns room-id's along with data played and username mail-id etc
+        .route("/get-user/{username}/{user_id}", get(get_profile)) // returns room-id's along with data played and username mail-id etc
 }
 
 fn player_routes() -> Router<AppState> {
