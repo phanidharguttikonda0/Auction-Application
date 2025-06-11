@@ -4,7 +4,7 @@ use axum::{extract::{WebSocketUpgrade, State}};
 use axum::extract::{ws::WebSocket, Path};
 use axum::extract::ws::Message;
 use axum::response::IntoResponse;
-use tokio::sync::mpsc::unbounded_channel;
+use tokio::sync::mpsc::{unbounded_channel, UnboundedSender};
 use uuid::Uuid;
 use crate::AppState;
 use crate::handlers::players::{is_foreign_player, player};
@@ -19,23 +19,31 @@ pub async fn handle_ws_upgrade(ws: WebSocketUpgrade, State(connections): State<A
     ws.on_upgrade(move |socket| handle_ws(socket,connections,room_id,user_id))
 } // while establishing connection for initial request we need to send these room-id and participant-id
 
-async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:String, user_id:i32) {
+async fn handle_ws(mut socket: WebSocket, mut connections:AppState, mut room_id:String, user_id:i32) {
     tracing::info!("New connection was created");
     let (tx, mut rx) = unbounded_channel::<Message>();
     let second_connection = connections.clone();
 
     let (mut sender, mut reciever) = socket.split();
-    let room_id_ = room_id.clone();
+    let mut room_id_ = room_id.clone();
 
     tokio::spawn(async move {
         while let Some(msg) = rx.recv().await {
-            if tokio::time::timeout(Duration::from_secs(12), sender.send(msg)).await.is_err() { // if the message was not reached to the client with in 12 seconds then user connection will be removed , so user needs to re-join again
+            if String::from(msg.to_text().unwrap()).starts_with("$") {
+                let room_id = String::from(msg.to_text().unwrap()) ;
+                let room_id: Vec<&str> = room_id.split(":").collect() ;
+                tracing::info!("room-id before updating was {}", room_id_) ;
+                room_id_ = room_id[1].to_string() ;
+                tracing::info!("The updated room_id was {}", room_id_) ;
+            } else if tokio::time::timeout(Duration::from_secs(12), sender.send(msg)).await.is_err() { // if the message was not reached to the client with in 12 seconds then user connection will be removed , so user needs to re-join again
 
                 tracing::error!("User was not able to reach messages on time");
 
                 if let Err(err) = sender.close().await { // if error occurs while closing this block executes
                     tracing::error!("Error while closing the connection : {:?}",err);
                 }
+
+
                 let mut read_sockets = second_connection.websocket_connections.read() ;
 
                 match read_sockets {
@@ -103,6 +111,15 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                             }, &mut con).await ;
                                             match participant_id {
                                                 Ok(participant_id) => {
+                                                    // storing an websocket connection for the user
+                                                    // after storing we need to change the room-id in the
+                                                    // to the task that recieves the messages in the format
+                                                    // room-id:"..."
+                                                    add_connection(&connections, room_id.clone().to_string(), user_id, tx.clone()).await ;
+                                                    // here we are rewriting the room-id that is sent something else
+                                                    tx.send(Message::from(
+                                                        format!("$room_id:{}",room_id.clone())
+                                                    )).unwrap() ;
                                                     con.commit().await.unwrap();
                                                     let mut players_teams = Vec::new() ;
                                                     players_teams.push((participant_id,team_name.clone())) ;
@@ -154,7 +171,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                     if room_exists(claims.user_id, &connections.redis_connection).await {
                                         let val = participant_exists(claims.user_id,Uuid::to_string(&room_join.room_id), &connections.redis_connection).await ;
                                         if  val.0 {
-
+                                            add_connection(&connections, room_id.clone().to_string(), user_id, tx.clone()).await ;
                                             tx.send(Message::from(
                                                 serde_json::to_string::<Room>(&get_Room(Uuid::to_string(&room_join.room_id), &connections.redis_connection).await).unwrap()
                                             )).unwrap();
@@ -174,8 +191,9 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
                                                         // store this new participant in the redis
                                                             match new_participant(Uuid::to_string(&room_join.room_id), claims.user_id, team.clone(), participant_id, &connections.redis_connection).await {
                                                                 Ok(_) => {
-                                                                    con.commit().await.unwrap();
 
+                                                                    con.commit().await.unwrap();
+                                                                    add_connection(&connections, room_id.clone().to_string(), user_id, tx.clone()).await ;
                                                                     // thirdly send the Redis Room data back to him
                                                                     tx.send(Message::from(
                                                                         serde_json::to_string::<Room>(&get_Room(Uuid::to_string(&room_join.room_id), &connections.redis_connection).await).unwrap()
@@ -370,6 +388,22 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, room_id:Stri
 
 }
 
+
+async fn add_connection(connections: &AppState, room_id: String, user_id: i32, tx: UnboundedSender<Message>) {
+    {
+        let mut ws_map = connections.websocket_connections.write().unwrap();
+        let participants = ws_map.entry(room_id.clone()).or_insert_with(Vec::new);
+
+        // Optional: Remove old connection if already present
+        participants.retain(|p| p.user_id != user_id);
+
+        participants.push(ParticipantsConnections {
+            user_id,
+            connection: tx.clone(),
+        });
+    }
+
+}
 
 
 async fn broadcast_message(msg: Message, room_id: String,state: &mut AppState) {

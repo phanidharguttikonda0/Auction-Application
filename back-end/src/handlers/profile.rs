@@ -9,6 +9,7 @@ use crate::models::profile::{Auction, Password, Profile, SimpleProfile};
 
 pub async fn profile(State(state): State<crate::AppState>, Extension(claims):Extension<Claims>) -> Json<Result<Profile, String>> {
     // from authorization header we will get the username and user-id
+    tracing::info!("the user-id was {}", claims.user_id) ;
     match get_user_profile(claims.username.clone(), claims.user_id, &state).await {
         Ok(user) =>
             {
@@ -87,7 +88,7 @@ async fn get_user_profile(username: String, user_id: i32, state: &AppState) -> R
 
     // we need to get the mail-id username
 
-let simple_profile = sqlx::query_as::<_,SimpleProfile>("select mail_id from users where user_id=$1")
+let simple_profile = sqlx::query_as::<_,SimpleProfile>("select mail_id from users where id=$1")
 .bind(user_id).fetch_one(&state.sql_database).await ;
 
     match simple_profile {

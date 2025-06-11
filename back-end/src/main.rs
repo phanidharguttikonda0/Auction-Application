@@ -114,7 +114,7 @@ async fn main() {
         .nest("/rooms", room_routes())
         .nest("/user", profile_routes())
         .nest("/player", player_routes())
-        .route("/ws", get(handle_ws_upgrade))
+        .route("/ws/{room_id}/{user_id}", get(handle_ws_upgrade))
         .route("/graphql/{room_id}", post(graphql_handler))
         .with_state(state)
         .layer(Extension(schema));
