@@ -30,11 +30,37 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, mut room_id:
     tokio::spawn(async move {
         while let Some(msg) = rx.recv().await {
             if String::from(msg.to_text().unwrap()).starts_with("$") {
+
                 let room_id = String::from(msg.to_text().unwrap()) ;
                 let room_id: Vec<&str> = room_id.split(":").collect() ;
                 tracing::info!("room-id before updating was {}", room_id_) ;
                 room_id_ = room_id[1].to_string() ;
                 tracing::info!("The updated room_id was {}", room_id_) ;
+                // here we are going to update the old id with the new id
+                if let Ok(read_sockets) = second_connection.websocket_connections.read() {
+                    if let Some(participants_list) = read_sockets.get(&room_id_) {
+                        let mut write_socket = second_connection.websocket_connections.write().unwrap();
+
+                        // Remove old key
+                        write_socket.remove(&room_id_);
+
+                        // Extract new room_id from message
+                        let msg_str = msg.to_text().unwrap();
+                        if let Some((_, new_room_id)) = msg_str.split_once(":") {
+                            // Reinsert with new key
+                            write_socket.insert(new_room_id.to_string(), (*participants_list).clone());
+                        } else {
+                            tracing::error!("Invalid message format for room update: {}", msg_str);
+                        }
+
+                        drop(write_socket); // Explicitly dropping write lock
+                    }
+                } else {
+                    tracing::error!("Error while reading websocket_connections");
+                }
+
+
+
             } else if tokio::time::timeout(Duration::from_secs(12), sender.send(msg)).await.is_err() { // if the message was not reached to the client with in 12 seconds then user connection will be removed , so user needs to re-join again
 
                 tracing::error!("User was not able to reach messages on time");
@@ -168,7 +194,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, mut room_id:
                             match claims {
                                 Some(claims) => {
                                     // let's check whether user exists or not using redis
-                                    if room_exists(claims.user_id, &connections.redis_connection).await {
+                                    if room_exists(room_id.clone(), &connections.redis_connection).await {
                                         let val = participant_exists(claims.user_id,Uuid::to_string(&room_join.room_id), &connections.redis_connection).await ;
                                         if  val.0 {
                                             add_connection(&connections, room_id.clone().to_string(), user_id, tx.clone()).await ;
@@ -270,12 +296,16 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, mut room_id:
                                 }
                             }
                         }else{
-                            if text == "READY" { // called by room-owner only
+                            tracing::info!("The sent data was {}", text.to_string() == "READY") ;
+                            tracing::info!("The sent data was {}", text.to_string() == String::from("READY")) ;
+                            let text = text.trim_matches('"');
+                            if text.to_string() == "READY" { // called by room-owner only
 
                                 // firstly let's check whether all the max-players joined or not
                                 if check_for_ready(room_id.clone() ,&connections.redis_connection).await {
                                     let player = player(&connections, 1).await.unwrap() ;
                                     // need to change the room-status
+                                    tracing::info!("The room-id was {}",room_id);
                                     let status = change_room_status(&connections,room_id.clone(),RoomStatus::ONGOING).await ;
                                     if status {
                                         broadcast_message(Message::from(serde_json::to_string(&player).unwrap()),room_id.clone(),&mut connections).await ;

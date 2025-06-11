@@ -1,6 +1,7 @@
 use std::os::linux::raw::stat;
 use axum::{extract::{State, Path, Json}, http::StatusCode, Form};
 use std::collections::HashMap;
+use std::str::FromStr;
 use sqlx::{Error, Postgres, Transaction};
 use uuid::Uuid;
 use crate::AppState;
@@ -21,7 +22,7 @@ pub async fn create_room(room: CreateRoom,connection: &mut Transaction<'_, Postg
         },
         Err(err) => {
             tracing::error!("Error Occured {}", err) ;
-            Err(String::from("Unable to create room, Make sure You didn't have a room with waiting or ongoing status created by the user"))
+            Err(String::from("Unable to create room, Make sure You didn't have a room with waiting or ongoing status created by the Owner"))
         }
     }
 
@@ -240,13 +241,14 @@ pub async fn player_unsold(player: PlayerUnsold, connections: &AppState) -> bool
 
 
 pub async fn change_room_status(state: &AppState, room_id: String, room_status: RoomStatus) -> bool {
-
+    tracing::info!("{}",Uuid::from_str(&room_id).unwrap()) ;
     let status = sqlx::query("update rooms set room_status=$1 where id=$2")
         .bind(match room_status {
             RoomStatus::WAITING => "WAITING",
             RoomStatus::ONGOING => "ONGOING",
             RoomStatus::FINISHED => "FINISHED"
-        }).bind(&room_id).execute(&state.sql_database).await ;
+        }).bind(&Uuid::from_str(&room_id).unwrap()).execute(&state.sql_database).await ;
+
     match status{ 
         Ok(status) => {
             if status.rows_affected() > 0 {

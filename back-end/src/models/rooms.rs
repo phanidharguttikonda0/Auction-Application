@@ -142,7 +142,7 @@ pub struct RedisRoom { // redis storing room-data
 room_id : RedisRoom
 */
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct ParticipantsConnections {
     pub user_id: i32,
     pub connection: UnboundedSender<Message>

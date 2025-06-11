@@ -29,7 +29,9 @@ pub async fn redis_room_creation(room: Room, owner_id: i32,client: &Client) {
     let serialized = serde_json::to_string(&redis_room).unwrap();
     tracing::info!("successfully going to set the new room in redis") ;
     let _: () = connection.set(Uuid::to_string(&room.room_id), serialized).await.unwrap();  // Store JSON string
-
+    tracing::info!("created the room successfully let's check the room is present or not") ;
+    let value:String = connection.get(Uuid::to_string(&room.room_id)).await.unwrap() ;
+    tracing::info!("room was {}", value) ;
 }
 
 pub async fn participant_exists(user_id: i32, room_id: String, connection: &Client) -> (bool, i32){
@@ -67,7 +69,7 @@ pub async fn participant_exists(user_id: i32, room_id: String, connection: &Clie
     (false, -1)
 }
 
-pub async fn room_exists(room_id: i32, connection: &Client) -> bool{
+pub async fn room_exists(room_id: String, connection: &Client) -> bool{
     let mut connection = match connection.get_multiplexed_tokio_connection().await {
         Ok(conn) => conn,
         Err(e) => {
