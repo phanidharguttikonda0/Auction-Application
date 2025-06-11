@@ -21,12 +21,14 @@ pub enum RoomStatus {
 }
 
 #[derive(Debug, Deserialize, Serialize,Clone)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum RoomType {
     PRIVATE,
     PUBLIC,
 }
 
 #[derive(Debug, Deserialize,Clone)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum Team {
     MUMBAIINDIANS,
     CHENNAISUPERKINGS,

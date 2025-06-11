@@ -86,7 +86,7 @@ async fn handle_ws(mut socket: WebSocket, mut connections:AppState, mut room_id:
                         let room_join = serde_json::from_str::<RoomJoin>(&text) ;
                         let bid = serde_json::from_str::<Bid>(&text) ;
                         let intrested_players_list = serde_json::from_str::<IntrestedPlayers>(&text) ;
-
+                        tracing::info!("{:?}",room_creation) ;
                         if let Ok(room_creation) = room_creation {
                             let claims = authorization_decode(room_creation.authorization_header) ;
 

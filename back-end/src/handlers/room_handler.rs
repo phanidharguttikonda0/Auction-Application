@@ -10,7 +10,7 @@ use crate::models::rooms::{CreateRoom, JoinRoom, PlayerSold, PlayerUnsold, PoolP
 pub async fn create_room(room: CreateRoom,connection: &mut Transaction<'_, Postgres>) -> Result<Uuid,String> {
 
 
-    let room_id = sqlx::query_scalar::<_,Uuid>("insert into rooms (max_participants,room_status,accessibility,owner_id) values ($1,$2,$3,$4) returning id)")
+    let room_id = sqlx::query_scalar::<_,Uuid>("insert into rooms (max_participants,room_status,accessibility,owner_id) values ($1,$2,$3,$4) returning id")
         .bind(room.max_players as i32).bind("WAITING").bind(room.accessibility).bind(room.user_id)
         .fetch_one(&mut **connection).await ;
 
