@@ -1,6 +1,6 @@
 # Auction Application
 
-Building the Application using Rust with Axum the things used in this application was Rest-api , websockets, Graph-ql and Postgress for Primary Storage and Redis for Speed access of the real-time data.
+This application was built using Rust with the Axum framework, incorporating REST APIs, WebSockets, and GraphQL. PostgreSQL serves as the primary data store, while Redis is used to accelerate access to real-time data
 
 ## Below is the Application Flow
 
